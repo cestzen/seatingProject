@@ -1,4 +1,4 @@
-package com.project.java.seating;
+package com.project.java.seating.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
