@@ -12,7 +12,7 @@ public class Batiment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	private List<Etage> etageList;
+	private List<Plan> planList;
 	private String nomBatiment;
 	
 	public Batiment() {
@@ -23,11 +23,11 @@ public class Batiment {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public List<Etage> getEtageList() {
-		return etageList;
+	public List<Plan> getPlanList() {
+		return planList;
 	}
-	public void setEtageList(List<Etage> etageList) {
-		this.etageList = etageList;
+	public void setEtageList(List<Plan> planList) {
+		this.planList = planList;
 	}
 	public String getNomBatiment() {
 		return nomBatiment;
