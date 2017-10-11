@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SeatingServlet
  */
-@WebServlet({ "/seating" })
+@WebServlet({ "/" })
 public class SeatingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
