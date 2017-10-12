@@ -13,7 +13,6 @@ public class Plan {
 	private String nom_plan;
 	private float hauteur;
 	private float largeur;
-	private String direction;
 	
 	public Plan() {
 		
@@ -42,12 +41,6 @@ public class Plan {
 	}
 	public void setLargeur(float largeur) {
 		this.largeur = largeur;
-	}
-	public String getDirection() {
-		return direction;
-	}
-	public void setDirection(String direction) {
-		this.direction = direction;
 	}
 	
 }

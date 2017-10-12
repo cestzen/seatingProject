@@ -13,6 +13,7 @@ public class Bureau {
 	private String nom_bureau;
 	private float y;
 	private float x;
+	private String direction;
 	
 	public Bureau() {
 		
@@ -41,6 +42,12 @@ public class Bureau {
 	}
 	public void setX(float x) {
 		this.x = x;
+	}
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
 	}
 	
 	
