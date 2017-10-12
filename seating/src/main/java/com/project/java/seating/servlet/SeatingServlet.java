@@ -44,7 +44,7 @@ public class SeatingServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		//response.getWriter().append(request.getParameter("lastname")).append(request.getParameter("name"));
+		
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class SeatingServlet extends HttpServlet{
 		
 		addCollaborateurService = new AddCollaborateurService();
 		addCollaborateurService.addCollaborateur(request.getParameter("lastname"),request.getParameter("name"));
-		doGet(request, response);
+		response.getWriter().append(request.getParameter("lastname")).append(request.getParameter("name"));
 	}
 
 	
