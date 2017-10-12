@@ -50,6 +50,7 @@ public class UploadPlanServlet extends HttpServlet {
 	    try (InputStream input = filePart.getInputStream()) {
 	        Files.copy(input, file.toPath());
 	    }
+	    response.getWriter().append("Reussi à télécharger ").append(fileName);
 	}
 
 }

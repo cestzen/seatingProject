@@ -4,9 +4,13 @@
 <html>
 <body>
 <form action="./" method="POST">
-First Name: <input type="text" name="name">
+Prenom: <input type="text" name="name">
 <br />
-Last Name: <input type="text" name="lastname" />
+Nom: <input type="text" name="lastname" />
+<br />
+Admin? <input type="checkbox" name="admin" />
+<br />
+Date d'arrivé: <input type="text" name="date" />
 <input type="submit" value="Submit" />
 </form>
 </body>

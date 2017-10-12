@@ -20,8 +20,6 @@ public class ProjectEntityManager {
 	public ProjectEntityManager() {
 	}
 
-
-
 	private SessionFactory buildSessionJavaConfigFactory() {
 		try {
 			Configuration configuration = new Configuration();
@@ -35,13 +33,14 @@ public class ProjectEntityManager {
 			props.put("hibernate.connection.password", "1234");
 			props.put("hibernate.hbm2ddl.auto", "update");
 			props.put("hibernate.current_session_context_class", "thread");
+			props.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 
 			configuration.setProperties(props);
 
 			// we can set mapping file or class with annotation
 			// addClass(Employee1.class) will look for resource
 			// com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
-			
+
 			configuration.addAnnotatedClass(Collaborateur.class);
 			configuration.addAnnotatedClass(Batiment.class);
 			configuration.addAnnotatedClass(Bureau.class);

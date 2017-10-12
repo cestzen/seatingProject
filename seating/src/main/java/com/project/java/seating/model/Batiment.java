@@ -1,17 +1,23 @@
 package com.project.java.seating.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Batiment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	@OneToMany
+	@JoinColumn(name="id")
 	private List<Plan> planList;
 	private String nomBatiment;
 	
@@ -26,7 +32,7 @@ public class Batiment {
 	public List<Plan> getPlanList() {
 		return planList;
 	}
-	public void setEtageList(List<Plan> planList) {
+	public void setEtageList(ArrayList<Plan> planList) {
 		this.planList = planList;
 	}
 	public String getNomBatiment() {
