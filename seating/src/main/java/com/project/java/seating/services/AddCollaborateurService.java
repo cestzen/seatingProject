@@ -15,7 +15,7 @@ public class AddCollaborateurService {
 		collaborateur.setNom_collaborateur("Baykut");
 		collaborateur.setPrenom_collaborateur("Beril");
 		collaborateur.setEstAdministrateur(true);
-		collaborateur.setDateArriver(new Date().toString());
+		collaborateur.setDateArriver(new Date().toString()); 
 		
 	}		
 }
