@@ -2,20 +2,23 @@ package com.project.java.seating.services;
 
 import java.util.Date;
 
-import org.hibernate.jpa.criteria.expression.function.CurrentDateFunction;
-
 import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
 public class AddCollaborateurService {
 
-	public void addCollaborateur(String Nom, String Prenom) {
+	public void addCollaborateur(String nom, String prenom) {
 		ProjectEntityManager projectEntityManager = new ProjectEntityManager();
 		Collaborateur collaborateur = new Collaborateur();
-		collaborateur.setNom_collaborateur("Baykut");
-		collaborateur.setPrenom_collaborateur("Beril");
+		collaborateur.setNom_collaborateur(nom);
+		collaborateur.setPrenom_collaborateur(prenom);
 		collaborateur.setEstAdministrateur(true);
 		collaborateur.setDateArriver(new Date().toString()); 
+		
+		projectEntityManager.getSessionFactory().getCurrentSession().beginTransaction();
+		projectEntityManager.getSessionFactory().getCurrentSession().save(collaborateur);
+		projectEntityManager.getSessionFactory().getCurrentSession().getTransaction().commit();
+		projectEntityManager.getSessionFactory().getCurrentSession().close();
 		
 	}		
 }

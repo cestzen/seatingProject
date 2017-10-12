@@ -18,39 +18,25 @@ import com.project.java.seating.services.AddCollaborateurService;
  * Servlet implementation class SeatingServlet
  */
 @WebServlet({ "/" })
-public class SeatingServlet extends HttpServlet implements ApplicationContextAware {
+public class SeatingServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	private ApplicationContext ac;
 	private AddCollaborateurService addCollaborateurService;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public SeatingServlet() {
-    	setApplicationContext(new ClassPathXmlApplicationContext("beans.xml"));
+    	super();
+    	//addCollaborateurService = new AddCollaborateurService();
+    	//setApplicationContext(new ClassPathXmlApplicationContext("beans.xml"));
     	
     }
-    
-	public void setAc(ApplicationContext ac) {
-		this.ac = ac;
-	}
-
 
 
 	public void setAddCollaborateurService(AddCollaborateurService addCollaborateurService) {
 		this.addCollaborateurService = addCollaborateurService;
 	}
-
-
-
-	@Override
-	public void setApplicationContext(ApplicationContext context) throws BeansException {
-		ac = context;
-		
-	}
-       
-
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -58,7 +44,7 @@ public class SeatingServlet extends HttpServlet implements ApplicationContextAwa
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		response.getWriter().append(request.getParameter("name"));
+		//response.getWriter().append(request.getParameter("lastname")).append(request.getParameter("name"));
 	}
 
 	/**
@@ -66,6 +52,9 @@ public class SeatingServlet extends HttpServlet implements ApplicationContextAwa
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		addCollaborateurService = new AddCollaborateurService();
+		addCollaborateurService.addCollaborateur(request.getParameter("lastname"),request.getParameter("name"));
 		doGet(request, response);
 	}
 
