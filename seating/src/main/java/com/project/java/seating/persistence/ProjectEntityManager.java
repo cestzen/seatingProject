@@ -1,6 +1,11 @@
 package com.project.java.seating.persistence;
 
+import com.project.java.seating.model.Batiment;
+import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Collaborateur;
+import com.project.java.seating.model.Equipement;
+import com.project.java.seating.model.Plan;
+
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
@@ -36,7 +41,12 @@ public class ProjectEntityManager {
 			// we can set mapping file or class with annotation
 			// addClass(Employee1.class) will look for resource
 			// com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
+			
 			configuration.addAnnotatedClass(Collaborateur.class);
+			configuration.addAnnotatedClass(Batiment.class);
+			configuration.addAnnotatedClass(Bureau.class);
+			configuration.addAnnotatedClass(Equipement.class);
+			configuration.addAnnotatedClass(Plan.class);
 
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();
