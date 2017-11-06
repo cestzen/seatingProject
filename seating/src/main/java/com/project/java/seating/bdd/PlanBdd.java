@@ -45,7 +45,7 @@ ProjectEntityManager projectEntityManager;
 		ouvertureEntity();
 		
 		Plan plan = new Plan();
-		plan.setNom_plan(nom);
+		plan.setNom(nom);
 		plan.setHauteur(hauteur);
 		plan.setLargeur(largeur);
 		
@@ -58,9 +58,9 @@ ProjectEntityManager projectEntityManager;
 	public void update(int id,String nom,float hauteur, float largeur) {
 		ouvertureEntity();
 		
-		List plans = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Plan WHERE id="+id ).list();
+		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Plan WHERE id=:id" ).setParameter("id", id).list();
 		Plan plan = (Plan) plans.get(0);
-		plan.setNom_plan(nom);
+		plan.setNom(nom);
 		plan.setHauteur(hauteur);
 		plan.setLargeur(largeur);
 		

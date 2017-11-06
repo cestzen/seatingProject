@@ -32,7 +32,7 @@ public class ProjectEntityManager {
 					"jdbc:mysql://localhost:3306/seating-db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 			props.put("hibernate.connection.username", "test_user");
 			props.put("hibernate.connection.password", "1234");
-			props.put("hibernate.hbm2ddl.auto", "create");
+			props.put("hibernate.hbm2ddl.auto", "update");
 			props.put("hibernate.current_session_context_class", "thread");
 			props.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 
