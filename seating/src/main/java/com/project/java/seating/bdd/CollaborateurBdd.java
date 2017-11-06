@@ -45,8 +45,8 @@ public class CollaborateurBdd {
 		ouvertureEntity();
 		
 		Collaborateur collaborateur = new Collaborateur();
-		collaborateur.setNom_collaborateur(nom_collaborateur);
-		collaborateur.setPrenom_collaborateur(prenom_collaborateur);
+		collaborateur.setNom(nom_collaborateur);
+		collaborateur.setPrenom(prenom_collaborateur);
 		collaborateur.setEstAdministrateur(estAdministrateur);
 		collaborateur.setDateArriver(dateArriver);
 		
@@ -55,34 +55,13 @@ public class CollaborateurBdd {
 		fermetureEntity();
 	}
 	
-	
-	public void update(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
-		update(id,nom_collaborateur,true,prenom_collaborateur,true,estAdministrateur,true,dateArriver,true);
-	}
-	
-	public void updateNom(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
-		update(id,nom_collaborateur,true,null,false,null,false,null,false);
-	}
-	
-	public void updatePrenom(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
-		update(id,null,false,prenom_collaborateur,true,null,false,null,false);
-	}
-	 
-	public void updateAdministrateur(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
-		update(id,null,false,null,false,estAdministrateur,true,null,false);
-	}
-	
-	public void updateDate(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
-		update(id,null,false,null,false,null,false,dateArriver,true);
-	}
-	
-	private void update(int id,String nom_collaborateur,Boolean nomModification,String prenom_collaborateur,Boolean prenomModification,Boolean estAdministrateur,Boolean estAdministrateurModification,String dateArriver,Boolean dateArriverModification) {
+	public void update(int id,String nom_collaborateur,Boolean nomModification,String prenom_collaborateur,Boolean prenomModification,Boolean estAdministrateur,Boolean estAdministrateurModification,String dateArriver,Boolean dateArriverModification) {
 		ouvertureEntity();
 		
-		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur WHERE id=:id").setParameter("id", id).list();
+		List<Collaborateur> collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur WHERE id=:id").setParameter("id", id).list();
 		Collaborateur collaborateur = (Collaborateur) collaborateurs.get(0);
-		if(nomModification)collaborateur.setNom_collaborateur(nom_collaborateur);
-		if(prenomModification)collaborateur.setPrenom_collaborateur(prenom_collaborateur);
+		if(nomModification)collaborateur.setNom(nom_collaborateur);
+		if(prenomModification)collaborateur.setPrenom(prenom_collaborateur);
 		if(estAdministrateurModification)collaborateur.setEstAdministrateur(estAdministrateur);
 		if(dateArriverModification)collaborateur.setDateArriver(dateArriver);
 		

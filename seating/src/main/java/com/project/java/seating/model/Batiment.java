@@ -17,7 +17,7 @@ public class Batiment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@OneToMany
-	@JoinColumn(name="id")
+	@JoinColumn
 	private List<Plan> planList;
 	private String nomBatiment;
 	

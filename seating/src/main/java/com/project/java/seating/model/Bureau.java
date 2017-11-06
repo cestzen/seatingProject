@@ -1,81 +1,93 @@
 package com.project.java.seating.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Bureau {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	private String nom_bureau;
+	private String nom;
 	private float y;
 	private float x;
-	private String direction;
-	private int id_collaborateur;
-	private int id_plan;
-	private int id_direction;
+	@OneToOne
+	@JoinColumn
+	private Collaborateur collaborateur;
+	@OneToMany
+	@JoinColumn
+	private List<Equipement> equipements;
+
 	
 	public Bureau() {
 		
 	}
-	
+
+
 	public long getId() {
 		return id;
 	}
+
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getNom_bureau() {
-		return nom_bureau;
+
+
+	public String getNom() {
+		return nom;
 	}
-	public void setNom_bureau(String nom_bureau) {
-		this.nom_bureau = nom_bureau;
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
+
+
 	public float getY() {
 		return y;
 	}
+
+
 	public void setY(float y) {
 		this.y = y;
 	}
+
+
 	public float getX() {
 		return x;
 	}
+
+
 	public void setX(float x) {
 		this.x = x;
 	}
-	public String getDirection() {
-		return direction;
-	}
-	public void setDirection(String direction) {
-		this.direction = direction;
+
+
+	public Collaborateur getCollaborateur() {
+		return collaborateur;
 	}
 
-	public int getId_collaborateur() {
-		return id_collaborateur;
+
+	public void setCollaborateur(Collaborateur collaborateur) {
+		this.collaborateur = collaborateur;
 	}
 
-	public void setId_collaborateur(int id_collaborateur) {
-		this.id_collaborateur = id_collaborateur;
+
+	public List<Equipement> getEquipements() {
+		return equipements;
 	}
 
-	public int getId_plan() {
-		return id_plan;
+
+	public void setEquipements(List<Equipement> equipements) {
+		this.equipements = equipements;
 	}
 
-	public void setId_plan(int id_plan) {
-		this.id_plan = id_plan;
-	}
-
-	public int getId_direction() {
-		return id_direction;
-	}
-
-	public void setId_direction(int id_direction) {
-		this.id_direction = id_direction;
-	}
-	
-	
 }

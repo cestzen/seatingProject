@@ -46,8 +46,7 @@ public class EquipementBdd {
 		ouvertureEntity();
 		
 		Equipement equipement = new Equipement();
-		equipement.setNom_equipement(nom_equipement);
-		equipement.setDate_achat(date_achat);
+		equipement.setNom(nom_equipement);
 		
 		projectEntityManager.getSessionFactory().getCurrentSession().save(equipement);
 		
@@ -67,13 +66,12 @@ public class EquipementBdd {
 		update(id,null,false,date_achat,true);
 	}
 	
-	private void update(int id,String nom_equipement,Boolean nomModification,String date_achat,Boolean dateModification) {
+	public void update(int id,String nom_equipement,Boolean nomModification,String date_achat,Boolean dateModification) {
 		ouvertureEntity();
 		
 		List equipements = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Equipement WHERE id="+id ).list();
 		Equipement equipement = (Equipement) equipements.get(0);
-		if(nomModification)equipement.setNom_equipement(nom_equipement);
-		if(dateModification)equipement.setDate_achat(date_achat);
+		if(nomModification)equipement.setNom(nom_equipement);
 		
 		projectEntityManager.getSessionFactory().getCurrentSession().merge(equipement);
 		

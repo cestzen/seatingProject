@@ -10,8 +10,8 @@ public class AddCollaborateurService {
 	public void addCollaborateur(String nom, String prenom) {
 		ProjectEntityManager projectEntityManager = new ProjectEntityManager();
 		Collaborateur collaborateur = new Collaborateur();
-		collaborateur.setNom_collaborateur(nom);
-		collaborateur.setPrenom_collaborateur(prenom);
+		collaborateur.setNom(nom);
+		collaborateur.setPrenom(prenom);
 		collaborateur.setEstAdministrateur(true);
 		collaborateur.setDateArriver(new Date().toString()); 
 		

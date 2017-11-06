@@ -5,6 +5,7 @@ import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.Equipement;
 import com.project.java.seating.model.Plan;
+import com.project.java.seating.model.TypeEquipement;
 
 import java.util.Properties;
 
@@ -41,11 +42,12 @@ public class ProjectEntityManager {
 			// addClass(Employee1.class) will look for resource
 			// com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
 
-			configuration.addAnnotatedClass(Collaborateur.class);
-			configuration.addAnnotatedClass(Batiment.class);
-			configuration.addAnnotatedClass(Bureau.class);
+			configuration.addAnnotatedClass(TypeEquipement.class);
 			configuration.addAnnotatedClass(Equipement.class);
+			configuration.addAnnotatedClass(Collaborateur.class);
+			configuration.addAnnotatedClass(Bureau.class);
 			configuration.addAnnotatedClass(Plan.class);
+			configuration.addAnnotatedClass(Batiment.class);
 
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();
@@ -65,5 +67,8 @@ public class ProjectEntityManager {
 			sessionJavaConfigFactory = buildSessionJavaConfigFactory();
 		return sessionJavaConfigFactory;
 	}
-
+public static void main(String[] args) {
+	ProjectEntityManager pe = new ProjectEntityManager();
+	pe.getSessionFactory();
+}
 }

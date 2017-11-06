@@ -8,7 +8,7 @@ import com.project.java.seating.persistence.ProjectEntityManager;
 
 public class PlanBdd {
 	
-ProjectEntityManager projectEntityManager;
+	private ProjectEntityManager projectEntityManager;
 	
 	public void ouvertureEntity() {
 		projectEntityManager = new ProjectEntityManager();
@@ -30,22 +30,21 @@ ProjectEntityManager projectEntityManager;
 		return plans;
 	}
 	
-	public Plan get(int id){
+	public List<Plan> get(String batiment){
 		
 		ouvertureEntity();
 		
-		List plans = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Plan WHERE id="+id ).list();
-		Plan plan = (Plan) plans.get(0);
+		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "SELECT p FROM Batiment b INNER JOIN b.planList p WHERE b.nomBatiment=:batiment").setParameter("batiment", batiment).list();
 		fermetureEntity();
 		
-		return plan;
+		return plans;
 	}
 	
 	public void create(String nom,float hauteur, float largeur) {
 		ouvertureEntity();
 		
 		Plan plan = new Plan();
-		plan.setNom_plan(nom);
+		plan.setNom(nom);
 		plan.setHauteur(hauteur);
 		plan.setLargeur(largeur);
 		
@@ -58,9 +57,9 @@ ProjectEntityManager projectEntityManager;
 	public void update(int id,String nom,float hauteur, float largeur) {
 		ouvertureEntity();
 		
-		List plans = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Plan WHERE id="+id ).list();
+		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Plan WHERE id=:id" ).setParameter("id", id).list();
 		Plan plan = (Plan) plans.get(0);
-		plan.setNom_plan(nom);
+		plan.setNom(nom);
 		plan.setHauteur(hauteur);
 		plan.setLargeur(largeur);
 		
