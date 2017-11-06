@@ -59,31 +59,42 @@ public class BureauBdd {
 	}
 	
 	
-	public void update(int id,String nom,float x, float y,String direction) {
-		update(id,true,nom,true,x,true,y,true,direction);
+	public void update(int id,String nom,float x, float y,String direction, int idPlan, int idCollaborateur) {
+		update(id,true,nom,true,x,true,y,true,direction,true,idPlan,true,idCollaborateur);
 	}
 	
 	public void updateName(int id,String nom) {
 
-		update(id,true,nom,false,0f,false,0f,false,null);
+		update(id,true,nom,false,0f,false,0f,false,null,false,0,false,0);
 	}
 	
 	public void updateX(int id,float x) {
 
-		update(id,false,null,true,x,false,0f,false,null);
+		update(id,false,null,true,x,false,0f,false,null,false,0,false,0);
 	}
 	
 	public void updateY(int id,float y) {
 
-		update(id,false,null,false,0f,true,y,false,null);
+		update(id,false,null,false,0f,true,y,false,null,false,0,false,0);
 	}
 	
 	public void updateDirection(int id,String direction) {
 
-		update(id,false,null,false,0f,false,0f,false,direction);
+		update(id,false,null,false,0f,false,0f,true,direction,false,0,false,0);
 	}
 	
-	private void update(int id,Boolean nomModifier,String nom,Boolean xModifier,float x,Boolean yModifier, float y,Boolean directionModifier, String direction) {
+	public void updateIdPlan(int id,int idPlan) {
+
+		update(id,false,null,false,0f,false,0f,false,null,true,idPlan,false,0);
+	}
+	
+	public void updateIdCollaborateur(int id,int idCollaborateur) {
+
+		update(id,false,null,false,0f,false,0f,false,null,false,0,true,idCollaborateur);
+	}
+	
+	
+	private void update(int id,Boolean nomModifier,String nom,Boolean xModifier,float x,Boolean yModifier, float y,Boolean directionModifier, String direction,Boolean idPlanModifier, int idPlan,Boolean idCollaborateurModifier, int idCollaborateur) {
 		ouvertureEntity();
 		
 		List bureaux = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Bureau WHERE id="+id ).list();
@@ -92,6 +103,8 @@ public class BureauBdd {
 		if(xModifier)bureau.setX(x);
 		if(yModifier)bureau.setY(y);
 		if(directionModifier)bureau.setDirection(direction);
+		if(idPlanModifier)bureau.setId_plan(idPlan);
+		if(idCollaborateurModifier)bureau.setId_collaborateur(idCollaborateur);
 		
 		projectEntityManager.getSessionFactory().getCurrentSession().merge(bureau);
 		

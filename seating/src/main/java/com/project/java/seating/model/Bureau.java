@@ -14,6 +14,9 @@ public class Bureau {
 	private float y;
 	private float x;
 	private String direction;
+	private int id_collaborateur;
+	private int id_plan;
+	private int id_direction;
 	
 	public Bureau() {
 		
@@ -48,6 +51,30 @@ public class Bureau {
 	}
 	public void setDirection(String direction) {
 		this.direction = direction;
+	}
+
+	public int getId_collaborateur() {
+		return id_collaborateur;
+	}
+
+	public void setId_collaborateur(int id_collaborateur) {
+		this.id_collaborateur = id_collaborateur;
+	}
+
+	public int getId_plan() {
+		return id_plan;
+	}
+
+	public void setId_plan(int id_plan) {
+		this.id_plan = id_plan;
+	}
+
+	public int getId_direction() {
+		return id_direction;
+	}
+
+	public void setId_direction(int id_direction) {
+		this.id_direction = id_direction;
 	}
 	
 	
