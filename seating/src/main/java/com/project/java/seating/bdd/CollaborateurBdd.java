@@ -23,10 +23,18 @@ public class CollaborateurBdd {
 		
 		ouvertureEntity();
 		
-		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur" ).list();
+		List<Collaborateur> collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur" ).list();
 		
 		fermetureEntity();
 		return collaborateurs;
+	}
+	
+	public void deleteCollaborateur(String id){
+		ouvertureEntity();
+		
+		projectEntityManager.getSessionFactory().getCurrentSession().createQuery("DELETE FROM Collaborateur WHERE id=:id").setParameter("id", id);
+		
+		fermetureEntity();
 	}
 	
 	public Collaborateur get(int id){

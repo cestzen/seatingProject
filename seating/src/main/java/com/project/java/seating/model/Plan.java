@@ -1,5 +1,6 @@
 package com.project.java.seating.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Plan {
@@ -77,5 +77,15 @@ public class Plan {
 		this.equipements = equipements;
 	}
 
+	public void addBureau(Bureau bureau){
+		if(this.bureaux == null)
+			this.bureaux = new ArrayList<>();
+		this.bureaux.add(bureau);
+	}
 	
+	public void addEquipement(Equipement equipement){
+		if(this.equipements == null)
+			this.equipements = new ArrayList<>();
+		this.equipements.add(equipement);
+	}
 }

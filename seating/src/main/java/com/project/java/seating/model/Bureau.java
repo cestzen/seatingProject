@@ -1,5 +1,6 @@
 package com.project.java.seating.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -90,4 +91,9 @@ public class Bureau {
 		this.equipements = equipements;
 	}
 
+	public void addEquipement(Equipement equipement){
+		if(this.equipements == null)
+			this.equipements = new ArrayList<>();
+		this.equipements.add(equipement);
+	}
 }
