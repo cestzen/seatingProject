@@ -10,11 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%  String[] windows = new String[]{"Batiment 1", "Batiment 2", "Batiment 3", "Batiment 4"};
-pageContext.setAttribute("windows", windows);%>
- <!-- items = string[] -->
+<%  
+String[] windows = new String[]{"Plan 1", "Plan 2", "Plan 3", "Plan 4"};
+pageContext.setAttribute("windows", windows);
+%>
 
 
+<label>Veuillez choisir un plan</label>
+<br><br>
     <FORM>
     <SELECT name="nom" size="1">
 	    <c:forEach var="item" items="${windows}" >
@@ -22,6 +25,7 @@ pageContext.setAttribute("windows", windows);%>
 		</c:forEach>
     </SELECT>
     </FORM>
-
+<br><br>
+<button>Valider</button>
 </body>
 </html>
