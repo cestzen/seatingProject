@@ -55,7 +55,7 @@ public class BatimentBdd {
 	public void update(int id,String nom) {
 		ouvertureEntity();
 		
-		List batiments = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Batiment WHERE id=:id").setParameter("id", id).list();
+		List batiments = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Batiment WHERE id=:id").setParameter("id", id).list(); 
 		Batiment batiment = (Batiment) batiments.get(0);
 		batiment.setNomBatiment(nom);
 		

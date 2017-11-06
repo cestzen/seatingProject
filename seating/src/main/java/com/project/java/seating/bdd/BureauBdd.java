@@ -11,7 +11,7 @@ public class BureauBdd {
 	ProjectEntityManager projectEntityManager;
 	public BureauBdd() {
 		
-	}
+	} 
 	
 	public void ouvertureEntity() {
 		projectEntityManager = new ProjectEntityManager();

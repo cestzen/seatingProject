@@ -67,7 +67,7 @@ public class CollaborateurBdd {
 	public void updatePrenom(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
 		update(id,null,false,prenom_collaborateur,true,null,false,null,false);
 	}
-	
+	 
 	public void updateAdministrateur(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
 		update(id,null,false,null,false,estAdministrateur,true,null,false);
 	}
