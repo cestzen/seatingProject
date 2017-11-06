@@ -1,19 +1,27 @@
 package com.project.java.seating.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Collaborateur {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private String nom_collaborateur;
-	private String prenom_collaborateur;
+	private String nom;
+	private String prenom;
 	private Boolean estAdministrateur;
 	private String dateArriver;
+	@OneToMany
+	@JoinColumn
+	private List<Equipement> equipements;
 	
 	public Collaborateur() {
 		
@@ -27,20 +35,20 @@ public class Collaborateur {
 		this.id = id;
 	}
 
-	public String getNom_collaborateur() {
-		return nom_collaborateur;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setNom_collaborateur(String nom_collaborateur) {
-		this.nom_collaborateur = nom_collaborateur;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public String getPrenom_collaborateur() {
-		return prenom_collaborateur;
+	public String getPrenom() {
+		return prenom;
 	}
 
-	public void setPrenom_collaborateur(String prenom_collaborateur) {
-		this.prenom_collaborateur = prenom_collaborateur;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 	public Boolean getEstAdministrateur() {
@@ -58,5 +66,14 @@ public class Collaborateur {
 	public void setDateArriver(String dateArriver) {
 		this.dateArriver = dateArriver;
 	}
+
+	public List<Equipement> getEquipements() {
+		return equipements;
+	}
+
+	public void setEquipements(List<Equipement> equipements) {
+		this.equipements = equipements;
+	}
+
 	
 }
