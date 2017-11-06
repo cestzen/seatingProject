@@ -13,13 +13,13 @@ import com.project.java.seating.bdd.CollaborateurBdd;
  * Servlet implementation class AddCollaborator
  */
 @WebServlet(name = "ajoutCollab", urlPatterns = { "/ajoutCollab" })
-public class AddCollaborator extends HttpServlet {
+public class AddCollaboratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddCollaborator() {
+	public AddCollaboratorServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
