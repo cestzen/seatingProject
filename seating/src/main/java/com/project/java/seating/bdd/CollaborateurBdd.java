@@ -33,7 +33,7 @@ public class CollaborateurBdd {
 		
 		ouvertureEntity();
 		
-		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur WHERE id="+id ).list();
+		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur WHERE id=:id").setParameter("id", id).list();
 		Collaborateur collaborateur = (Collaborateur) collaborateurs.get(0);
 		
 		fermetureEntity();
@@ -67,7 +67,7 @@ public class CollaborateurBdd {
 	public void updatePrenom(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
 		update(id,null,false,prenom_collaborateur,true,null,false,null,false);
 	}
-	
+	 
 	public void updateAdministrateur(int id,String nom_collaborateur,String prenom_collaborateur,Boolean estAdministrateur,String dateArriver) {
 		update(id,null,false,null,false,estAdministrateur,true,null,false);
 	}
@@ -79,7 +79,7 @@ public class CollaborateurBdd {
 	private void update(int id,String nom_collaborateur,Boolean nomModification,String prenom_collaborateur,Boolean prenomModification,Boolean estAdministrateur,Boolean estAdministrateurModification,String dateArriver,Boolean dateArriverModification) {
 		ouvertureEntity();
 		
-		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur WHERE id="+id ).list();
+		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Collaborateur WHERE id=:id").setParameter("id", id).list();
 		Collaborateur collaborateur = (Collaborateur) collaborateurs.get(0);
 		if(nomModification)collaborateur.setNom_collaborateur(nom_collaborateur);
 		if(prenomModification)collaborateur.setPrenom_collaborateur(prenom_collaborateur);

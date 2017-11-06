@@ -11,7 +11,7 @@ public class BureauBdd {
 	ProjectEntityManager projectEntityManager;
 	public BureauBdd() {
 		
-	}
+	} 
 	
 	public void ouvertureEntity() {
 		projectEntityManager = new ProjectEntityManager();
@@ -97,7 +97,7 @@ public class BureauBdd {
 	private void update(int id,Boolean nomModifier,String nom,Boolean xModifier,float x,Boolean yModifier, float y,Boolean directionModifier, String direction,Boolean idPlanModifier, int idPlan,Boolean idCollaborateurModifier, int idCollaborateur) {
 		ouvertureEntity();
 		
-		List bureaux = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Bureau WHERE id="+id ).list();
+		List bureaux = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Bureau WHERE id=:id").setParameter("id", id).list();
 		Bureau bureau = (Bureau) bureaux.get(0);
 		if(nomModifier)bureau.setNom_bureau(nom);
 		if(xModifier)bureau.setX(x);
