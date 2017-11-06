@@ -37,7 +37,7 @@ public class BureauBdd {
 		
 		ouvertureEntity();
 		
-		List bureaux = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Bureau WHERE id="+id ).list();
+		List bureaux = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Bureau WHERE id=:id" ).setParameter("id", id).list();
 		Bureau bureau = (Bureau) bureaux.get(0);
 		
 		fermetureEntity();
