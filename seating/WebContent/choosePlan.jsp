@@ -11,7 +11,7 @@
 </head>
 <body>
 <%  
-String[] windows = new String[]{"Plan 1", "Plan 2", "Plan 3", "Plan 4"};
+String[] windows = getFloorPlans();
 pageContext.setAttribute("windows", windows);
 %>
 

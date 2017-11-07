@@ -9,8 +9,8 @@
 <body>
 
 
-<canvas id="canvas" width="500" height="500"  style="background: url(C:/wamp64/www/test/plan2.jpg) no-repeat center center;" > 
-	<canvas id="canvas2" width="500" height="500"> 
+<canvas id="canvas" width="500" height="500" style="background: url(C:/wamp64/www/test/plan2.jpg) no-repeat center center;" > 
+	<canvas id="canvas2" width="500" height="500" > 
 
 		<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
@@ -53,7 +53,7 @@ var hauteur = 40;
 			if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
 
 				aEffacer = true;
-				context.clearRect(hor-(largeur/2), clientY1, largeur, hauteur);
+				context.clearRect(hor-(largeur/2), ver-(hauteur/2), largeur, hauteur);
 				array.splice(i, 1);
 			   }
 			}
@@ -64,7 +64,7 @@ var hauteur = 40;
 			context.fillStyle = "pink";
 			var x = event.clientX ;
 			var y = event.clientY ;
-			context.fillRect(x-20, y-20, largeur, hauteur);
+			context.fillRect(x-(largeur/2), y-(hauteur/2), largeur, hauteur);
 			person = {name:'table1',hor:x,ver:y};
 		    array.push(person); 
 		}
