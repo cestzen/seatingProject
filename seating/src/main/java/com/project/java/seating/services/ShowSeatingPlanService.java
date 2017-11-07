@@ -30,6 +30,21 @@ public class ShowSeatingPlanService {
 		
 	}
 	
+	public String[] getFloorPlans(){
+		List<Plan> planList = planBdd.getAll();
+		String[] plans = new String[planList.size()];
+		
+		for(int i = 0; i < planList.size() ; i++)
+			plans[i] = planList.get(i).getNom();
+		
+		return plans;
+		
+	}
+	
+	public void addPlan(Plan plan) {
+		planBdd.create(plan.getNom(), 0, 0);
+	}
+	
 	public void getFloorPlans(int floor){
 		
 	}

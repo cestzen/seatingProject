@@ -9,12 +9,10 @@
 <body>
 
 
-<canvas id="canvas" width="500" height="500" style="background: url(C:/wamp64/www/test/plan2.jpg) no-repeat center center;" > 
-	<canvas id="canvas2" width="500" height="500" > 
+<canvas id="canvas" width="500" height="500" style="background: url(C:/wamp64/www/test/plan2.jpg) no-repeat center center;background-size:contain;" > 
 
 		<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
-	</canvas>
 </canvas>
 
 
@@ -25,53 +23,61 @@ var canvas  = document.querySelector('#canvas');
 var context = canvas.getContext('2d');
 
 
-var canvas2  = document.querySelector('#canvas2');
-var context2 = canvas2.getContext('2d');
-
 var e=event || window.event;
 var largeur = 40;
 var hauteur = 40;
 
   var element = document.getElementById('canvas');
 	
-	element.onclick = function() {
+  element.onclick = function() {
 
 		var aEffacer = false;
-		
+
+		var x = event.clientX - 10 ;
+		var y = event.clientY -5;
 
 		for (var i = 0; i < array.length; i++) {
 			
 			   var hor = array[i]["hor"] ;
-			   var clientX1 = event.clientX -20 ;
-			   var clientX2 = event.clientX +20 ;
+			   var clientX1 = x -(largeur/2) ;
+			   var clientX2 = x +(largeur/2) ;
 			   
 			   var ver = array[i]["ver"] ;
-			   var clientY1 = event.clientY -20 ;
-			   var clientY2 = event.clientY +20 ;
+			   var clientY1 = y -(hauteur/2) ;
+			   var clientY2 = y +(hauteur/2) ;
 			   
 			
-			if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
-
-				aEffacer = true;
-				context.clearRect(hor-(largeur/2), ver-(hauteur/2), largeur, hauteur);
-				array.splice(i, 1);
-			   }
+				if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
+	
+					aEffacer = true;
+					array.splice(i, 1);
+					
+	
+					
+				}
 			}
 		
 		if(aEffacer){
-			
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				for(var i = 0; i < array.length; i++)
+				{
+				
+			    var hor = array[i]["hor"]-(largeur/2) ;
+			    var ver = array[i]["ver"] -(hauteur/2) ;
+				
+				context.fillRect(hor, ver, largeur, hauteur);
+				}
+					
+			   
 		}else{
-			context.fillStyle = "pink";
-			var x = event.clientX ;
-			var y = event.clientY ;
+			context.fillStyle = "grey";
 			context.fillRect(x-(largeur/2), y-(hauteur/2), largeur, hauteur);
-			person = {name:'table1',hor:x,ver:y};
-		    array.push(person); 
+			bureau = {name:'table1',hor:x,ver:y};
+		    array.push(bureau); 
 		}
 		
 
-    };
-    
+  };
     
 </script>
 </body>
