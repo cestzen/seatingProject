@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.bdd.CollaborateurBdd;
 
 /**
@@ -15,13 +17,21 @@ import com.project.java.seating.bdd.CollaborateurBdd;
 @WebServlet(name = "ajoutCollab", urlPatterns = { "/ajoutCollab" })
 public class AddCollaboratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private CollaborateurBdd collaborateurBdd;
+	private ApplicationContext ac;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public AddCollaboratorServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		ac = new ClassPathXmlApplicationContext("beans.xml");
+		collaborateurBdd = (CollaborateurBdd) ac.getBean("collaborateurBdd");
+	}
+
+
+	public void setCollaborateurBdd(CollaborateurBdd collaborateurBdd) {
+		this.collaborateurBdd = collaborateurBdd;
 	}
 
 	/**
@@ -40,10 +50,10 @@ public class AddCollaboratorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CollaborateurBdd bdd = new CollaborateurBdd();
 
-		bdd.create(request.getParameter("lastname"), request.getParameter("name"),
-				request.getParameter("admin") == null || request.getParameter("admin").isEmpty() ? true : false, request.getParameter("date"));
+		collaborateurBdd.create(request.getParameter("lastname"), request.getParameter("name"),
+				request.getParameter("admin") == null || request.getParameter("admin").isEmpty() ? false : true,
+				request.getParameter("date"));
 	}
 
 }

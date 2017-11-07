@@ -6,9 +6,20 @@ import com.project.java.seating.bdd.PlanBdd;
 import com.project.java.seating.model.Plan;
 
 public class ShowSeatingPlanService {
+	private PlanBdd planBdd;
 	
+	public ShowSeatingPlanService() {
+	}
+	
+	
+
+	public void setPlanBdd(PlanBdd planBdd) {
+		this.planBdd = planBdd;
+	}
+
+
+
 	public String[] getFloorPlans(String nomBatiment){
-		PlanBdd planBdd = new PlanBdd();
 		List<Plan> planList = planBdd.get(nomBatiment);
 		String[] plans = new String[planList.size()];
 		

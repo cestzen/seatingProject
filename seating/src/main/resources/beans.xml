@@ -1,11 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<?xml version = "1.0" encoding = "UTF-8"?>
 
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-  <bean id="addCollaborateurService" class="com.project.java.seating.services.AddCollaborateurService">
-  </bean>
+	<bean id="projectEntityManager"
+		class="com.project.java.seating.persistence.ProjectEntityManager">
+	</bean>
 
+	<bean id="collaborateurBdd" class="com.project.java.seating.bdd.CollaborateurBdd">
+		<property name="projectEntityManager" ref="projectEntityManager"></property>
+	</bean>
+	<bean id="planBdd" class="com.project.java.seating.bdd.PlanBdd">
+		<property name="projectEntityManager" ref="projectEntityManager"></property>
+	</bean>
+	<bean id="showSeatingPlanService"
+		class="com.project.java.seating.services.ShowSeatingPlanService">
+		<property name="planBdd" ref="planBdd"></property>
+	</bean>
+	
 
 
 </beans>

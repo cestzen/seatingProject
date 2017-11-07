@@ -20,6 +20,15 @@ public class ProjectEntityManager {
 
 	public ProjectEntityManager() {
 	}
+	
+	public void ouvertureEntity() {
+		getSessionFactory().getCurrentSession().beginTransaction();
+	}
+	
+	public void fermetureEntity() {
+		getSessionFactory().getCurrentSession().getTransaction().commit();
+		getSessionFactory().close();
+	}
 
 	private SessionFactory buildSessionJavaConfigFactory() {
 		try {
