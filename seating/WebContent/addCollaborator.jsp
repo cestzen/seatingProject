@@ -8,6 +8,10 @@ Prenom: <input type="text" name="name">
 <br />
 Nom: <input type="text" name="lastname" />
 <br />
+Nom d'utilisateur: <input type="text" name="username" />
+<br />
+Mot de passe: <input type="text" name="password" />
+<br />
 Admin? <input type="checkbox" name="admin" />
 <br />
 Date d'arrivé: <input type="text" name="date" />

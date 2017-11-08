@@ -14,18 +14,20 @@ import javax.persistence.OneToMany;
 @Entity
 public class Collaborateur {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String nom;
 	private String prenom;
+	private String nomUtilisateur;
+	private String motDePasse;
 	private Boolean estAdministrateur;
 	private String dateArriver;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn
 	private List<Equipement> equipements;
-	
+
 	public Collaborateur() {
-		
+
 	}
 
 	public long getId() {
@@ -72,12 +74,28 @@ public class Collaborateur {
 		return equipements;
 	}
 
+	public String getNomUtilisateur() {
+		return nomUtilisateur;
+	}
+
+	public void setNomUtilisateur(String nomUtilisateur) {
+		this.nomUtilisateur = nomUtilisateur;
+	}
+
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
+
 	public void setEquipements(List<Equipement> equipements) {
 		this.equipements = equipements;
 	}
 
-	public void addEquipement(Equipement equipement){
-		if(this.equipements == null)
+	public void addEquipement(Equipement equipement) {
+		if (this.equipements == null)
 			this.equipements = new ArrayList<>();
 		this.equipements.add(equipement);
 	}

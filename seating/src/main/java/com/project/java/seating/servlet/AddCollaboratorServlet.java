@@ -53,7 +53,7 @@ public class AddCollaboratorServlet extends HttpServlet {
 
 		collaborateurBdd.create(request.getParameter("lastname"), request.getParameter("name"),
 				request.getParameter("admin") == null || request.getParameter("admin").isEmpty() ? false : true,
-				request.getParameter("date"));
+				request.getParameter("date"), request.getParameter("username"), request.getParameter("password"));
 	}
 
 }

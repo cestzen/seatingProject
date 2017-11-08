@@ -9,6 +9,7 @@ import com.project.java.seating.model.TypeEquipement;
 
 import java.util.Properties;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -20,14 +21,17 @@ public class ProjectEntityManager {
 
 	public ProjectEntityManager() {
 	}
-	
+
 	public void ouvertureEntity() {
-		getSessionFactory().getCurrentSession().beginTransaction();
+		try{
+		getSessionFactory().getCurrentSession().isDirty();
+		}catch(HibernateException e){
+			getSessionFactory().getCurrentSession().beginTransaction();
+		}
 	}
-	
+
 	public void fermetureEntity() {
 		getSessionFactory().getCurrentSession().getTransaction().commit();
-		getSessionFactory().close();
 	}
 
 	private SessionFactory buildSessionJavaConfigFactory() {
@@ -76,8 +80,9 @@ public class ProjectEntityManager {
 			sessionJavaConfigFactory = buildSessionJavaConfigFactory();
 		return sessionJavaConfigFactory;
 	}
-public static void main(String[] args) {
-	ProjectEntityManager pe = new ProjectEntityManager();
-	pe.getSessionFactory();
-}
+
+	public static void main(String[] args) {
+		ProjectEntityManager pe = new ProjectEntityManager();
+		pe.getSessionFactory();
+	}
 }
