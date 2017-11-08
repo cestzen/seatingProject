@@ -3,6 +3,7 @@ package com.project.java.seating.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class Batiment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn
 	private List<Plan> planList;
 	private String nomBatiment;

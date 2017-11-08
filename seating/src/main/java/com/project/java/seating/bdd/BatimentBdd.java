@@ -9,8 +9,14 @@ public class BatimentBdd {
 	
 	ProjectEntityManager projectEntityManager;
 	
+	public BatimentBdd() {
+	}
+
+	public void setProjectEntityManager(ProjectEntityManager projectEntityManager) {
+		this.projectEntityManager = projectEntityManager;
+	}
+
 	public void ouvertureEntity() {
-		projectEntityManager = new ProjectEntityManager();
 		projectEntityManager.getSessionFactory().getCurrentSession().beginTransaction();
 	}
 	
@@ -62,5 +68,12 @@ public class BatimentBdd {
 		projectEntityManager.getSessionFactory().getCurrentSession().merge(batiment);
 		
 		fermetureEntity();
+	}
+
+	public void create(Batiment batiment) {
+		ouvertureEntity();
+		projectEntityManager.getSessionFactory().getCurrentSession().save(batiment);
+		fermetureEntity();
+		
 	}
 }

@@ -1,36 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="http://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
 <title>Insert title here</title>
 </head>
 <body>
 
 
-<canvas id="canvas" width="500" height="500" style="background: url(C:/wamp64/www/test/plan2.jpg) no-repeat center center;background-size:contain;" > 
+	<canvas id="canvas" width="500" height="500"
+		style="background: url(C:/Users/Sylvain/Desktop/Capture.png) no-repeat center center; background-size: contain;">
 
-		<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
+	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
-</canvas>
+	</canvas>
+	<form action="./addBureaux" method="POST">
+		<input type="hidden" id="data" name="data"/> 
+		<input type="submit" id="submit"
+			value="Submit" />
+	</form>
+	<script>
+
+	var array = [];
+	var canvas  = document.querySelector('#canvas');
+	var context = canvas.getContext('2d');
 
 
-<script>
+	var e=event || window.event;
+	var largeur = 40;
+	var hauteur = 40;
 
-var array = [];
-var canvas  = document.querySelector('#canvas');
-var context = canvas.getContext('2d');
-
-
-var e=event || window.event;
-var largeur = 40;
-var hauteur = 40;
-
-  var element = document.getElementById('canvas');
+ 	var element = document.getElementById('canvas');
+  
+  	var submit = document.getElementById('submit');
+  	submit.onclick = function(){
+		$('#data').val(JSON.stringify(array));
+	  
+  	};
 	
-  element.onclick = function() {
-
+  	element.onclick = function() {
 		var aEffacer = false;
 
 		var x = event.clientX - 10 ;
@@ -65,13 +76,13 @@ var hauteur = 40;
 			    var hor = array[i]["hor"]-(largeur/2) ;
 			    var ver = array[i]["ver"] -(hauteur/2) ;
 				
-				context.fillRect(hor, ver, largeur, hauteur);
+				context.strokeRect(hor, ver, largeur, hauteur);
 				}
 					
 			   
 		}else{
 			context.fillStyle = "grey";
-			context.fillRect(x-(largeur/2), y-(hauteur/2), largeur, hauteur);
+			context.strokeRect(x-(largeur/2), y-(hauteur/2), largeur, hauteur);
 			bureau = {name:'table1',hor:x,ver:y};
 		    array.push(bureau); 
 		}

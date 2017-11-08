@@ -3,6 +3,7 @@ package com.project.java.seating.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +19,10 @@ public class Plan {
 	private String nom;
 	private float hauteur;
 	private float largeur;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn
 	private List<Bureau> bureaux;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn
 	private List<Equipement> equipements;
 	

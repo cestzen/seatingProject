@@ -1,4 +1,5 @@
 
+
 <%@page import="com.project.java.seating.model.Plan"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
