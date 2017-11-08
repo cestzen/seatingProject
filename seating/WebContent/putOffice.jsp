@@ -44,18 +44,18 @@
   	element.onclick = function() {
 		var aEffacer = false;
 
-		var x = event.clientX - 10 ;
-		var y = event.clientY -5;
+		var xval = event.clientX - 10 ;
+		var yval = event.clientY -5;
 
 		for (var i = 0; i < array.length; i++) {
 			
 			   var hor = array[i]["hor"] ;
-			   var clientX1 = x -(largeur/2) ;
-			   var clientX2 = x +(largeur/2) ;
+			   var clientX1 = xval -(largeur/2) ;
+			   var clientX2 = xval +(largeur/2) ;
 			   
 			   var ver = array[i]["ver"] ;
-			   var clientY1 = y -(hauteur/2) ;
-			   var clientY2 = y +(hauteur/2) ;
+			   var clientY1 = yval -(hauteur/2) ;
+			   var clientY2 = yval +(hauteur/2) ;
 			   
 			
 				if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
@@ -82,8 +82,8 @@
 			   
 		}else{
 			context.fillStyle = "grey";
-			context.strokeRect(x-(largeur/2), y-(hauteur/2), largeur, hauteur);
-			bureau = {name:'table1',hor:x,ver:y};
+			context.strokeRect(xval-(largeur/2), yval-(hauteur/2), largeur, hauteur);
+			bureau = {nom:'table1',x:xval,y:yval};
 		    array.push(bureau); 
 		}
 		

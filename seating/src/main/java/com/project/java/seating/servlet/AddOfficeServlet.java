@@ -1,5 +1,6 @@
 package com.project.java.seating.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import com.project.java.seating.bdd.BatimentBdd;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Plan;
-import com.project.java.seating.services.ShowSeatingPlanService;
+import com.project.java.seating.tools.JsonTools;
 
 /**
  * Servlet implementation class AddOfficeServlet
@@ -27,6 +28,8 @@ public class AddOfficeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BatimentBdd batimentBdd;
 	private ApplicationContext ac;
+
+	private static final JsonTools<Bureau> jsonTool = new JsonTools<>(Bureau.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -58,21 +61,20 @@ public class AddOfficeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			JSONArray json = new JSONArray(request.getParameter("data"));
+
 			Batiment batiment = new Batiment();
 			batiment.setNomBatiment("testBatiment");
 			Plan plan = new Plan();
 
-			for(int i = 0; i < json.length(); i++){
-				Bureau bureau = new Bureau();
-				
-				bureau.setNom((String) json.getJSONObject(i).get("name"));
-				bureau.setX((Integer) json.getJSONObject(i).get("hor"));
-				bureau.setY((Integer) json.getJSONObject(i).get("ver"));
+			JSONArray json = new JSONArray(request.getParameter("data"));
+
+			for (int i = 0; i < json.length(); i++) {
+				Bureau bureau = jsonTool.createObject(json.getJSONObject(i).toString());
 				plan.addBureau(bureau);
 			}
+
 			batiment.addPlan(plan);
-			
+
 			batimentBdd.create(batiment);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

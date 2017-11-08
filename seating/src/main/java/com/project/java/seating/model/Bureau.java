@@ -12,13 +12,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Bureau {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	@JsonProperty("nom")
 	private String nom;
+	@JsonProperty("y")
 	private float y;
+	@JsonProperty("x")
 	private float x;
 	@OneToOne
 	@JoinColumn
