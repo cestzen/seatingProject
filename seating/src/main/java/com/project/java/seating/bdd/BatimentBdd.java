@@ -16,50 +16,42 @@ public class BatimentBdd {
 		this.projectEntityManager = projectEntityManager;
 	}
 
-	public void ouvertureEntity() {
-		projectEntityManager.getSessionFactory().getCurrentSession().beginTransaction();
-	}
-	
-	public void fermetureEntity() {
-		projectEntityManager.getSessionFactory().getCurrentSession().getTransaction().commit();
-		projectEntityManager.getSessionFactory().close();
-	}
-	
+
 	public List<Batiment> getAll(){
 		
-		ouvertureEntity();
+		projectEntityManager.ouvertureEntity();
 		
 		List batiments = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Batiment" ).list();
 		
-		fermetureEntity();
+		projectEntityManager.fermetureEntity();
 		return batiments;
 	}
 	
 	public Batiment get(int id){
 		
-		ouvertureEntity();
+		projectEntityManager.ouvertureEntity();
 		
 		List batiments = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Batiment WHERE id=:id").setParameter("id", id).list();
 		Batiment batiment = (Batiment) batiments.get(0);
-		fermetureEntity();
+		projectEntityManager.fermetureEntity();
 		
 		return batiment;
 	}
 	
 	public void create(String nom) {
-		ouvertureEntity();
+		projectEntityManager.ouvertureEntity();
 		
 		Batiment batiment = new Batiment();
 		batiment.setNomBatiment(nom);
 		
 		projectEntityManager.getSessionFactory().getCurrentSession().save(batiment);
 		
-		fermetureEntity();
+		projectEntityManager.fermetureEntity();
 	}
 	
 	
 	public void update(int id,String nom) {
-		ouvertureEntity();
+		projectEntityManager.ouvertureEntity();
 		
 		List batiments = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Batiment WHERE id=:id").setParameter("id", id).list(); 
 		Batiment batiment = (Batiment) batiments.get(0);
@@ -67,13 +59,13 @@ public class BatimentBdd {
 		
 		projectEntityManager.getSessionFactory().getCurrentSession().merge(batiment);
 		
-		fermetureEntity();
+		projectEntityManager.fermetureEntity();
 	}
 
 	public void create(Batiment batiment) {
-		ouvertureEntity();
+		projectEntityManager.ouvertureEntity();
 		projectEntityManager.getSessionFactory().getCurrentSession().save(batiment);
-		fermetureEntity();
+		projectEntityManager.fermetureEntity();
 		
 	}
 }

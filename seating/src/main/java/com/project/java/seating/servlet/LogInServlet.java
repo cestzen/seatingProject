@@ -58,8 +58,8 @@ public class LogInServlet extends HttpServlet {
 				
 				if (collaborateur.getEstAdministrateur())
 					session.setAttribute("admin", "admin");
-				// setting cookie to expiry in 30 mins
-				session.setMaxInactiveInterval(60);
+				// setting cookie to expiry in 5 mins
+				session.setMaxInactiveInterval(60 * 5);
 				session.setAttribute("user", user);
 				response.sendRedirect("/seating/loginSuccess.jsp");
 			} else {

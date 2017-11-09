@@ -16,12 +16,12 @@
 </head>
 <body>
 
-	<label>Veuillez choisir un plan</label>
+	<label>Veuillez choisir un batiment</label>
 	<br>
 	<br>
 	<FORM action="./showSeating" method="POST">
-		<SELECT name="nomPlan" size="1" id="selectBatiment">
-			<c:forEach var="item" items="${nomsPlans}">
+		<SELECT name="nomBatiment" size="1" id="selectBatiment">
+			<c:forEach var="item" items="${nomsBatiments}">
 				<OPTION><c:out value="${item}" />
 			</c:forEach>
 		</SELECT> <input type="submit" id="submit" value="Submit" />

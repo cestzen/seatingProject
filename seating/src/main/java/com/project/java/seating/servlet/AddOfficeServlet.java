@@ -1,6 +1,5 @@
 package com.project.java.seating.servlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
