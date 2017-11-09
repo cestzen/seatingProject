@@ -43,9 +43,10 @@ public class ShowSeatingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String batiment = request.getParameter("batiment");
-		
-		response.getWriter().println(showSeatingPlanService.getFloorPlans(batiment));
+		String[] plans = showSeatingPlanService.getFloorPlans();
+		request.setAttribute( "plans",plans );
+
+	    this.getServletContext().getRequestDispatcher( "/choosePlan.jsp" ).forward( request, response );
 	}
 
 	/**

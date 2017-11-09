@@ -17,11 +17,6 @@
 //JSON.parse();
 //String[] windows = new String[]{"Plan 1", "Plan 2", "Plan 3", "Plan 4"};
 //pageContext.setAttribute("windows", windows);
-ShowSeatingPlanService show = new ShowSeatingPlanService();
-Plan plan = new Plan();
-plan.setNom("Plan 1");
-show.addPlan(plan);
-String[] plans = show.getFloorPlans();
 %>
 
 
