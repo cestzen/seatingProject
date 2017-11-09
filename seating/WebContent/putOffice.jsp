@@ -7,6 +7,11 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"
 	type="text/javascript"></script>
 <title>Insert title here</title>
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login.jsp");
+	}
+%>
 </head>
 <body>
 
