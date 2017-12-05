@@ -1,81 +1,59 @@
 package com.project.java.seating.bdd;
 
-
 import java.util.List;
 
 import com.project.java.seating.model.Equipement;
+import com.project.java.seating.model.TypeEquipement;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
 public class EquipementBdd {
-	
+
 	ProjectEntityManager projectEntityManager;
-	
-	public void ouvertureEntity() {
-		projectEntityManager = new ProjectEntityManager();
-		projectEntityManager.getSessionFactory().getCurrentSession().beginTransaction();
+	private TypeEquipementBdd typeEquipementBdd;
+
+	public EquipementBdd() {
 	}
-	
-	public void fermetureEntity() {
-		projectEntityManager.getSessionFactory().getCurrentSession().getTransaction().commit();
-		projectEntityManager.getSessionFactory().close();
+
+	public void setTypeEquipementBdd(TypeEquipementBdd typeEquipementBdd) {
+		this.typeEquipementBdd = typeEquipementBdd;
 	}
-	
-	public List<Equipement> getAll(){
-		
-		ouvertureEntity();
-		
-		List equipements = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Equipement" ).list();
-		
-		fermetureEntity();
+
+	public void setProjectEntityManager(ProjectEntityManager projectEntityManager) {
+		this.projectEntityManager = projectEntityManager;
+	}
+
+	public List<Equipement> getAll() {
+
+		projectEntityManager.ouvertureEntity();
+
+		List equipements = projectEntityManager.getSessionFactory().getCurrentSession().createQuery("from Equipement")
+				.list();
+
+		projectEntityManager.fermetureEntity();
 		return equipements;
 	}
-	
-	public Equipement get(int id){
-		
-		ouvertureEntity();
-		
-		List equipements = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Equipement WHERE id="+id ).list();
+
+	public Equipement get(int id) {
+
+		projectEntityManager.ouvertureEntity();
+
+		List equipements = projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Equipement WHERE id=" + id).list();
 		Equipement equipement = (Equipement) equipements.get(0);
-		
-		fermetureEntity();
-		
+
+		projectEntityManager.fermetureEntity();
+
 		return equipement;
 	}
-	
-	public void create(String nom_equipement,String date_achat) {
-		ouvertureEntity();
-		
+
+	public Equipement create(String externalId, String type) {
+		TypeEquipement typeEquipement = typeEquipementBdd.get(type);
+
 		Equipement equipement = new Equipement();
-		equipement.setNom(nom_equipement);
-		
-		projectEntityManager.getSessionFactory().getCurrentSession().save(equipement);
-		
-		fermetureEntity();
+		equipement.setExternalId(externalId);
+		equipement.setTypeEquipement(typeEquipement);
+
+		return equipement;
 	}
-	
-	
-	public void update(int id,String nom_equipement,String date_achat) {
-		update(id,nom_equipement,true,date_achat,true);
-	}
-	
-	public void updateNom(int id,String nom_equipement,String date_achat) {
-		update(id,nom_equipement,true,null,false);
-	}
-	
-	public void updateDate(int id,String nom_equipement,String date_achat) {
-		update(id,null,false,date_achat,true);
-	}
-	
-	public void update(int id,String nom_equipement,Boolean nomModification,String date_achat,Boolean dateModification) {
-		ouvertureEntity();
-		
-		List equipements = projectEntityManager.getSessionFactory().getCurrentSession().createQuery( "from Equipement WHERE id="+id ).list();
-		Equipement equipement = (Equipement) equipements.get(0);
-		if(nomModification)equipement.setNom(nom_equipement);
-		
-		projectEntityManager.getSessionFactory().getCurrentSession().merge(equipement);
-		
-		fermetureEntity();
-	}
-	
+
 }

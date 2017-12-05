@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.CollaborateurAncien;
+import com.project.java.seating.model.Equipement;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
 public class CollaborateurBdd {
@@ -80,6 +81,20 @@ public class CollaborateurBdd {
 		projectEntityManager.fermetureEntity();
 
 		return collaborateurs;
+	}
+
+	public void addEquipement(String id, Equipement eq) {
+		projectEntityManager.ouvertureEntity();
+
+		Collaborateur colab = (Collaborateur) projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Collaborateur WHERE id=:id").setParameter("id", Long.parseLong(id)).list().get(0);
+		
+		colab.addEquipement(eq);
+		
+		projectEntityManager.getSessionFactory().getCurrentSession().save(colab);
+
+		projectEntityManager.fermetureEntity();
+
 	}
 
 }

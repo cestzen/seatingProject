@@ -21,10 +21,10 @@ public class Plan {
 	private float largeur;
 	private String path;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="bureauPlan")
 	private List<Bureau> bureaux;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="equipementPlan")
 	private List<Equipement> equipements;
 	
 	public Plan() {

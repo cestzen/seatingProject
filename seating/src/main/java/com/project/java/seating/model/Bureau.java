@@ -29,7 +29,7 @@ public class Bureau {
 	@JoinColumn
 	private Collaborateur collaborateur;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="equipementBureau")
 	private List<Equipement> equipements;
 
 	

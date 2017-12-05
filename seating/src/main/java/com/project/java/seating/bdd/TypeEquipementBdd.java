@@ -24,4 +24,14 @@ public class TypeEquipementBdd {
 		projectEntityManager.fermetureEntity();
 		return typeEquipements;
 	}
+
+	public TypeEquipement get(String type) {
+		projectEntityManager.ouvertureEntity();
+
+		List typeEquipements = projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from TypeEquipement WHERE nom=:type").setParameter("type", type).list();
+
+		projectEntityManager.fermetureEntity();
+		return (TypeEquipement) typeEquipements.get(0);
+	}
 }

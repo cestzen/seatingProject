@@ -16,8 +16,7 @@ public class Equipement {
 	@ManyToOne
 	@JoinColumn
 	private TypeEquipement typeEquipement;
-	private String nom;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String externalId;
 
 	public Equipement() {
@@ -38,14 +37,6 @@ public class Equipement {
 
 	public void setTypeEquipement(TypeEquipement typeEquipement) {
 		this.typeEquipement = typeEquipement;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
 	}
 
 	public String getExternalId() {

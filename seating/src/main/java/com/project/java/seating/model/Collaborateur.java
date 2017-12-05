@@ -23,7 +23,7 @@ public class Collaborateur {
 	private Boolean estAdministrateur;
 	private String dateArriver;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="equipementCollaborateur")
 	private List<Equipement> equipements;
 
 	public Collaborateur() {

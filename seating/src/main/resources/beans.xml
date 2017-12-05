@@ -21,6 +21,10 @@
 	<bean id="batimentBdd" class="com.project.java.seating.bdd.BatimentBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
+	<bean id="equipementBdd" class="com.project.java.seating.bdd.EquipementBdd">
+		<property name="projectEntityManager" ref="projectEntityManager"></property>
+		<property name="typeEquipementBdd" ref="typeEquipementBdd"></property>
+	</bean>
 	<bean id="typeEquipementBdd" class="com.project.java.seating.bdd.TypeEquipementBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
@@ -29,7 +33,7 @@
 		<property name="planBdd" ref="planBdd"></property>
 	</bean>
 
-	
+
 
 
 </beans>

@@ -35,7 +35,7 @@
 			<a href="uploadPlan">Ajouter
 				plans</a>
 			<br />
-			<a href="addEquipment.jsp">Ajouter
+			<a href="ajoutEquipment">Ajouter
 				equipement</a>
 			<br />
 			<a href="showSeating">Ajouter
