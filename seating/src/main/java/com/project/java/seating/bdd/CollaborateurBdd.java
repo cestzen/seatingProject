@@ -1,6 +1,9 @@
 package com.project.java.seating.bdd;
 
+import java.util.List;
+
 import com.project.java.seating.model.Collaborateur;
+import com.project.java.seating.model.CollaborateurAncien;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
 public class CollaborateurBdd {
@@ -24,12 +27,31 @@ public class CollaborateurBdd {
 	}
 
 	public void deleteCollaborateur(String id) {
+		createRecordOfExitCollab(id);
+		Collaborateur collab = get(id);
+		projectEntityManager.ouvertureEntity();
+		projectEntityManager.getSessionFactory().getCurrentSession().delete(collab);
+		projectEntityManager.fermetureEntity();
+	}
+
+	private void createRecordOfExitCollab(String id) {
+		CollaborateurAncien collabAncien = new CollaborateurAncien(get(id));
+
 		projectEntityManager.ouvertureEntity();
 
-		projectEntityManager.getSessionFactory().getCurrentSession()
-				.createQuery("DELETE FROM Collaborateur WHERE id=:id").setParameter("id", id);
+		projectEntityManager.getSessionFactory().getCurrentSession().save(collabAncien);
+		projectEntityManager.fermetureEntity();
+	}
+
+	private Collaborateur get(String id) {
+		projectEntityManager.ouvertureEntity();
+
+		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Collaborateur WHERE id=:id").setParameter("id", Long.parseLong(id)).list();
 
 		projectEntityManager.fermetureEntity();
+
+		return (Collaborateur) collaborateurs.get(0);
 	}
 
 	public void create(String nom_collaborateur, String prenom_collaborateur, Boolean estAdministrateur,
@@ -47,6 +69,17 @@ public class CollaborateurBdd {
 		projectEntityManager.getSessionFactory().getCurrentSession().save(collaborateur);
 
 		projectEntityManager.fermetureEntity();
+	}
+
+	public List<Collaborateur> getAll() {
+		projectEntityManager.ouvertureEntity();
+
+		List collaborateurs = projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Collaborateur").list();
+
+		projectEntityManager.fermetureEntity();
+
+		return collaborateurs;
 	}
 
 }

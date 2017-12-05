@@ -1,36 +1,33 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.project.java.seating.bdd.CollaborateurBdd;
 import com.project.java.seating.model.Collaborateur;
 
 /**
- * Servlet implementation class LogInServlet
+ * Servlet implementation class AddCollaborator
  */
-@WebServlet("/login")
-public class LogInServlet extends HttpServlet {
+@WebServlet(name = "deleteCollab", urlPatterns = { "/deleteCollab" })
+public class DeleteCollaboratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CollaborateurBdd collaborateurBdd;
 	private ApplicationContext ac;
-	private static HttpSession session;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LogInServlet() {
+	public DeleteCollaboratorServlet() {
 		super();
 		ac = new ClassPathXmlApplicationContext("beans.xml");
 		collaborateurBdd = (CollaborateurBdd) ac.getBean("collaborateurBdd");
@@ -46,28 +43,25 @@ public class LogInServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-			// get request parameters for userID and password
-			String user = request.getParameter("username");
-			String pwd = request.getParameter("password");
+		List<Collaborateur> collaborateurs = collaborateurBdd.getAll();
+		List<String> nomCollaborateurs = new ArrayList<>();
+		for (Collaborateur collab : collaborateurs)
+			nomCollaborateurs.add(collab.getId() + ": " + collab.getNom() + ", " + collab.getPrenom());
+		request.setAttribute("collaborateurs", nomCollaborateurs);
 
-			Collaborateur collaborateur = collaborateurBdd.findCollaborateur(user, pwd);
-			if (collaborateur != null) {
-				session = request.getSession(true);
-				
-				if (collaborateur.getEstAdministrateur())
-					session.setAttribute("admin", "admin");
-				// setting cookie to expiry in 5 mins
-				session.setMaxInactiveInterval(60 * 5);
-				session.setAttribute("user", user);
-				response.sendRedirect("/seating/loginSuccess.jsp");
-			} else {
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-				PrintWriter out = response.getWriter();
-				out.println("<font color=red>Either user name or password is wrong.</font>");
-				rd.include(request, response);
-			}
-		
+		this.getServletContext().getRequestDispatcher("/deleteCollaborator.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println(request.getParameter("collab"));
+		collaborateurBdd.deleteCollaborateur(request.getParameter("collab").split(":")[0]);
+		response.getWriter().append(request.getParameter("collab").split(":")[1]);
+		response.getWriter().append(" est supprimé");
 	}
 
 }

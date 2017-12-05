@@ -3,6 +3,7 @@ package com.project.java.seating.persistence;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Collaborateur;
+import com.project.java.seating.model.CollaborateurAncien;
 import com.project.java.seating.model.Equipement;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.model.TypeEquipement;
@@ -23,9 +24,9 @@ public class ProjectEntityManager {
 	}
 
 	public void ouvertureEntity() {
-		try{
-		getSessionFactory().getCurrentSession().isDirty();
-		}catch(HibernateException e){
+		try {
+			getSessionFactory().getCurrentSession().isDirty();
+		} catch (HibernateException e) {
 			getSessionFactory().getCurrentSession().beginTransaction();
 		}
 	}
@@ -58,6 +59,7 @@ public class ProjectEntityManager {
 			configuration.addAnnotatedClass(TypeEquipement.class);
 			configuration.addAnnotatedClass(Equipement.class);
 			configuration.addAnnotatedClass(Collaborateur.class);
+			configuration.addAnnotatedClass(CollaborateurAncien.class);
 			configuration.addAnnotatedClass(Bureau.class);
 			configuration.addAnnotatedClass(Plan.class);
 			configuration.addAnnotatedClass(Batiment.class);

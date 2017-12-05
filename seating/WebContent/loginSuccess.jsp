@@ -29,6 +29,9 @@
 			<a href="addCollaborator.jsp">Ajouter
 				collaborateur</a>
 			<br />
+			<a href="deleteCollab">Supprimer
+				collaborateur</a>
+			<br />
 			<a href="uploadPlan">Ajouter
 				plans</a>
 			<br />
