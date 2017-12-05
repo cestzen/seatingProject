@@ -16,7 +16,7 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 <body>
 
 	<canvas id="canvas" width="500" height="500"
-		style="background: url(C:/Users/Sylvain/Desktop/Capture.png) no-repeat center center; background-size: contain;">
+		style="background: url(${typesEquipements[3]}) no-repeat center center; background-size: contain;">
 
 	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 

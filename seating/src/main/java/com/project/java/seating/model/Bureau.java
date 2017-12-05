@@ -37,7 +37,7 @@ public class Bureau {
 		
 	}
 
-
+	
 	public long getId() {
 		return id;
 	}
@@ -102,4 +102,6 @@ public class Bureau {
 			this.equipements = new ArrayList<>();
 		this.equipements.add(equipement);
 	}
+	
+	
 }

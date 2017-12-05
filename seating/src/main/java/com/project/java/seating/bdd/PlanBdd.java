@@ -37,6 +37,18 @@ public class PlanBdd {
 
 		return plans;
 	}
+	
+	public Plan getPlan(String name) {
+
+		projectEntityManager.ouvertureEntity();
+
+		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("FROM Collaborateur WHERE plan=:plan")
+				.setParameter("plan", name).list();
+		projectEntityManager.fermetureEntity();
+
+		return plans.get(0);
+	}
 
 	public void create(String nom, float hauteur, float largeur) {
 		projectEntityManager.ouvertureEntity();

@@ -19,7 +19,7 @@
 	<label>Veuillez choisir un plan</label>
 	<br>
 	<br>
-	<FORM action="./showSeating" method="POST">
+	<FORM action="./choosePlan" method="POST">
 		<SELECT name="nomPlan" size="1" id="selectBatiment">
 			<c:forEach var="item" items="${nomsPlans}">
 				<OPTION><c:out value="${item}" />

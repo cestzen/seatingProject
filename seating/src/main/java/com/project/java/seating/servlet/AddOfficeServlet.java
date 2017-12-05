@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.project.java.seating.bdd.BatimentBdd;
+import com.project.java.seating.bdd.PlanBdd;
 import com.project.java.seating.bdd.TypeEquipementBdd;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Bureau;
@@ -30,6 +31,7 @@ public class AddOfficeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TypeEquipementBdd typeEquipementBdd;
 	private BatimentBdd batimentBdd;
+	private PlanBdd planBdd;
 	private ApplicationContext ac;
 
 	private static final JsonTools<Bureau> jsonTool = new JsonTools<>(Bureau.class);
@@ -41,6 +43,7 @@ public class AddOfficeServlet extends HttpServlet {
 		super();
 		ac = new ClassPathXmlApplicationContext("beans.xml");
 		batimentBdd = (BatimentBdd) ac.getBean("batimentBdd");
+		planBdd = (PlanBdd) ac.getBean("planBdd");
 		typeEquipementBdd = (TypeEquipementBdd) ac.getBean("typeEquipementBdd");
 	}
 
@@ -66,6 +69,16 @@ public class AddOfficeServlet extends HttpServlet {
 		//typeEquipementBdd.create("test");
 		
 		//String[] typesEquipements = addOfficeService.getTypesEquipement();
+		
+		Plan plan = planBdd.getPlan(request.getParameter("nomPlan"));
+		String[] varPlan = new String[4];
+		varPlan[0] = plan.getHauteur()+"";
+		varPlan[1] = plan.getLargeur()+"";
+		varPlan[2] = plan.getNom()+"";
+		varPlan[3] = plan.getPath()+"";
+		
+		request.setAttribute( "varPlan",varPlan );
+
 		
 		List<TypeEquipement> typeEquipementList = typeEquipementBdd.getAll();
 		String[] typesEquipements = new String[typeEquipementList.size()];

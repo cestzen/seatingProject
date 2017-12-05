@@ -19,6 +19,7 @@ public class Plan {
 	private String nom;
 	private float hauteur;
 	private float largeur;
+	private String path;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn
 	private List<Bureau> bureaux;
@@ -89,4 +90,14 @@ public class Plan {
 			this.equipements = new ArrayList<>();
 		this.equipements.add(equipement);
 	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	
 }
