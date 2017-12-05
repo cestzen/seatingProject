@@ -4,12 +4,14 @@
 <html>
 <head>
 <%
-	if (session.getAttribute("user") == null) {
+	if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
 		response.sendRedirect("login.jsp");
 	}
 %>
 </head>
 <body>
+	<h3>Ajouter un collaborateur</h3>
+	<br />
 	<form action="./ajoutCollab" method="POST">
 		Prenom: <input type="text" name="name"> <br /> Nom: <input
 			type="text" name="lastname" /> <br /> Nom d'utilisateur: <input

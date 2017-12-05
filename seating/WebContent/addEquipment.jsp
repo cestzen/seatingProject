@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <%
-	if (session.getAttribute("user") == null) {
-		response.sendRedirect("login.jsp");
-	}
+if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
+	response.sendRedirect("login.jsp");
+}
 %>
 </head>
 <body>

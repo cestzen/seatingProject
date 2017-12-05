@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
 	pageEncoding="US-ASCII"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,15 +19,30 @@
 			admin = true;
 	%>
 	<h3>
-		Bonjour <%=userName%>.
+		Bonjour
+		<%=userName%>.
 	</h3>
 	<br>
-	<%
-		if (admin)
-	%>
-	Logged in as
-	<%=userName%>
-
+	<c:choose>
+		<c:when test='${admin=="admin"}'>
+			<h4>Panel administrateur</h4>
+			<a href="addCollaborator.jsp">Ajouter
+				collaborateur</a>
+			<br />
+			<a href="uploadPlan">Ajouter
+				plans</a>
+			<br />
+			<a href="addEquipment.jsp">Ajouter
+				equipement</a>
+			<br />
+			<a href="showSeating">Ajouter
+				bureaux</a>
+			<br />
+		</c:when>
+	</c:choose>
+	<h4>Panel utilisateur</h4>
+	<a href="https://html.com/attributes/a-href/">Visualiser les
+		collaborateurs</a>
 	<form action="./logout" method="GET">
 		<input type="submit" id="logout" value="Logout" />
 	</form>
