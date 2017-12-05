@@ -10,11 +10,9 @@
 	type="text/javascript"></script>
 <title>Plan</title>
 <%
-if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
-	response.sendRedirect("login.jsp");
-}
-
-
+	if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
+		response.sendRedirect("login.jsp");
+	}
 %>
 </head>
 <body>
@@ -25,34 +23,36 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
 	</canvas>
-		<label id="labelX"> </label>
-		<label id="labelY"> </label>
-		<div style="display:inline-block;vertical-align:top;">
-			<div style="display:inline-block;vertical-align:top;">
-				Nom bureau: <input type="text" name="name" id="inputName"><br />
-			</div>
-			<div style="display:inline-block;vertical-align:top;">
-					Nom de l'équipement: <input type="text" name="nameEquipment" id="nameEquipment"/><br/>
-					Type d'equipement
-					    <SELECT name="nom" size="1" id="nameTypeEquipment">
-						    <c:forEach var="item" items="${typesEquipements}" >
-							    <OPTION><c:out value="${item}" />
-							</c:forEach>
-					    </SELECT>
-					    <br/><br/>
-					 Nom de l'utilisateur
-					 	<SELECT name="nom" size="1" id="nameUser">
-						    <c:forEach var="item" items="${collaborateurs}" >
-							    <OPTION><c:out value="${item}" />
-							</c:forEach>
-					    </SELECT>
-			</div>
-			<div style="display:inline-block;vertical-align:top;">
-				<button style="margin-left:30px;" id="submit" onclick="delOffice();" >Delete</button>
-			</div>
+	<label id="labelX"> </label>
+	<label id="labelY"> </label>
+	<div style="display: inline-block; vertical-align: top;">
+		<div style="display: inline-block; vertical-align: top;">
+			Nom bureau: <input type="text" name="name" id="inputName"><br />
 		</div>
-	
-	
+		<div style="display: inline-block; vertical-align: top;">
+			Nom de l'équipement: <input type="text" name="nameEquipment"
+				id="nameEquipment" /><br /> Type d'equipement <SELECT name="nom"
+				size="1" id="nameTypeEquipment">
+				<c:forEach var="item" items="${typesEquipements}">
+					<OPTION><c:out value="${item}" />
+				</c:forEach>
+			</SELECT> <br /> <br /> Nom de l'utilisateur <SELECT name="nom" size="1"
+				id="nameUser">
+				<c:forEach var="item" items="${collaborateurs}">
+					<OPTION><c:out value="${item}" />
+				</c:forEach>
+			</SELECT>
+		</div>
+		<div style="display: inline-block; vertical-align: top;">
+			<button style="margin-left: 30px;" id="submit" onclick="delOffice();">Delete</button>
+		</div>
+		<form action="./addBureaux" method="POST">
+			<input type="hidden" id="array" name="array"/> <input type="submit"
+				value="Submit" />
+		</form>
+	</div>
+
+
 	<script>
 
 	var array = [];
@@ -136,6 +136,8 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 			
 			context.strokeRect(hor, ver, largeur, hauteur);
 			}
+
+			
 		}
 
 		for (var i = 0; i < array.length; i++) {
@@ -174,7 +176,8 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 			context.fillStyle = "grey";
 			context.strokeRect(xval-(largeur/2), yval-(hauteur/2), largeur, hauteur);
 			bureau = {nom:inputName.value,x:xval,y:yval,nomEquipment:nameEquipment.value,nomTypeEquipment:nameTypeEquipment,nomUtilisateur:nameUser};
-			array.push(bureau); 
+			array.push(bureau);
+			document.getElementById("array").value=JSON.stringify(array);
 			inputName.value = "";
 			nameEquipment.value = "";
 			nameTypeEquipmentSelect.selectedIndex = 0;
