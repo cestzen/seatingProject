@@ -1,9 +1,11 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,6 +77,10 @@ public class AddEquipmentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Equipement eq = equipmentBdd.create(request.getParameter("externalId"), request.getParameter("type"));
 		collaborateurBdd.addEquipement(request.getParameter("collab").split(":")[0], eq);
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=green>MESSAGE : Equipement cree</font>");
+		rd.include(request, response);
 	}
 
 }

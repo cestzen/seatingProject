@@ -1,6 +1,9 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +34,10 @@ public class LogoutServlet extends HttpServlet {
     	if(session != null){
     		session.invalidate();
     	}
-		response.getWriter().append("Logged out");
+    	RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=green>MESSAGE : LOGGED OUT</font>");
+		rd.include(request, response);
 	}
 
 

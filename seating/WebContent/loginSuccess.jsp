@@ -26,26 +26,25 @@
 	<c:choose>
 		<c:when test='${admin=="admin"}'>
 			<h4>Panel administrateur</h4>
-			<a href="addCollaborator.jsp">Ajouter
-				collaborateur</a>
+			<a href="addCollaborator.jsp">Ajouter collaborateur</a>
 			<br />
-			<a href="deleteCollab">Supprimer
-				collaborateur</a>
+			<a href="deleteCollab">Supprimer collaborateur</a>
 			<br />
-			<a href="uploadPlan">Ajouter
-				plans</a>
+			<a href="uploadPlan">Ajouter plans</a>
 			<br />
-			<a href="ajoutEquipment">Ajouter
-				equipement</a>
+			<a href="ajoutEquipment">Ajouter equipement</a>
 			<br />
-			<a href="showSeating">Ajouter
-				bureaux</a>
+			<a href="showSeating">Ajouter bureaux</a>
 			<br />
 		</c:when>
 	</c:choose>
 	<h4>Panel utilisateur</h4>
-	<a href="https://html.com/attributes/a-href/">Visualiser les
-		collaborateurs</a>
+	<c:choose>
+		<c:when test='${user!=null}'>
+			<a href="https://html.com/attributes/a-href/">Visualiser les
+				collaborateurs</a>
+		</c:when>
+	</c:choose>
 	<form action="./logout" method="GET">
 		<input type="submit" id="logout" value="Logout" />
 	</form>

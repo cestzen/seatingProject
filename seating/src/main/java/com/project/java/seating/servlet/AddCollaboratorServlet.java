@@ -1,6 +1,9 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,8 +43,10 @@ public class AddCollaboratorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=red>MESSAGE : Cette page n'existe pas</font>");
+		rd.include(request, response);
 	}
 
 	/**
@@ -54,6 +59,11 @@ public class AddCollaboratorServlet extends HttpServlet {
 		collaborateurBdd.create(request.getParameter("lastname"), request.getParameter("name"),
 				request.getParameter("admin") == null || request.getParameter("admin").isEmpty() ? false : true,
 				request.getParameter("date"), request.getParameter("username"), request.getParameter("password"));
+		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=green>MESSAGE : Collaborateur cree</font>");
+		rd.include(request, response);
 	}
 
 }

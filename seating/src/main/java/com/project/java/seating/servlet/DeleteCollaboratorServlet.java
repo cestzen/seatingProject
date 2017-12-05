@@ -1,9 +1,11 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,8 +62,10 @@ public class DeleteCollaboratorServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println(request.getParameter("collab"));
 		collaborateurBdd.deleteCollaborateur(request.getParameter("collab").split(":")[0]);
-		response.getWriter().append(request.getParameter("collab").split(":")[1]);
-		response.getWriter().append(" est supprimé");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=green>MESSAGE : Collaborateur supprime</font>");
+		rd.include(request, response);
 	}
 
 }

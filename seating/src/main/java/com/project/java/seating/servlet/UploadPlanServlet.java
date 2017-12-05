@@ -3,11 +3,13 @@ package com.project.java.seating.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -86,7 +88,10 @@ public class UploadPlanServlet extends HttpServlet {
 		batiment.addPlan(plan);
 		batimentBdd.save(batiment);
 
-		response.getWriter().append("Reussi à télécharger ").append(fileName);
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=green>MESSAGE : Plan cree</font>");
+		rd.include(request, response);
 	}
 
 }
