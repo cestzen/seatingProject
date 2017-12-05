@@ -118,16 +118,18 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 		var xval = eX - 10 ;
 		var yval = eY -5;
 		if(bureauSelectionner != null){
+			
 			array[indexBureauSelectionner]["nom"] = inputName.value;
 			array[indexBureauSelectionner]["nomEquipment"] = nameEquipment.value;
 			array[indexBureauSelectionner]["nomTypeEquipment"] = nameTypeEquipment;
-			
 			array[indexBureauSelectionner]["nomUtilisateur"] = nameUser;
+			
 			inputName.value = "";
 			nameEquipment.value = "";
 			nameTypeEquipmentSelect.selectedIndex = 0;
 			nameUserSelect.selectedIndex = 0;
 			context.clearRect(0, 0, canvas.width, canvas.height);
+			
 			for(var i = 0; i < array.length; i++)
 			{
 			
