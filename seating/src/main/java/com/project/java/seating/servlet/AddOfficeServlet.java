@@ -1,6 +1,7 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.project.java.seating.bdd.BatimentBdd;
+import com.project.java.seating.bdd.TypeEquipementBdd;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Plan;
+import com.project.java.seating.model.TypeEquipement;
 import com.project.java.seating.tools.JsonTools;
 
 /**
@@ -25,6 +28,7 @@ import com.project.java.seating.tools.JsonTools;
 @WebServlet("/addBureaux")
 public class AddOfficeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private TypeEquipementBdd typeEquipementBdd;
 	private BatimentBdd batimentBdd;
 	private ApplicationContext ac;
 
@@ -37,11 +41,18 @@ public class AddOfficeServlet extends HttpServlet {
 		super();
 		ac = new ClassPathXmlApplicationContext("beans.xml");
 		batimentBdd = (BatimentBdd) ac.getBean("batimentBdd");
+		typeEquipementBdd = (TypeEquipementBdd) ac.getBean("typeEquipementBdd");
 	}
+
+	public void setTypeEquipementBdd(TypeEquipementBdd typeEquipementBdd) {
+		this.typeEquipementBdd = typeEquipementBdd;
+	}
+
 
 	public void setBatimentBdd(BatimentBdd batimentBdd) {
 		this.batimentBdd = batimentBdd;
 	}
+	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -50,7 +61,22 @@ public class AddOfficeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getParameter("data"));
+		//response.getWriter().append("Served at: ").append(request.getParameter("data"));
+		
+		//typeEquipementBdd.create("test");
+		
+		//String[] typesEquipements = addOfficeService.getTypesEquipement();
+		
+		List<TypeEquipement> typeEquipementList = typeEquipementBdd.getAll();
+		String[] typesEquipements = new String[typeEquipementList.size()];
+		
+		for(int i = 0; i < typeEquipementList.size() ; i++)
+			typesEquipements[i] = typeEquipementList.get(i).getNom();
+		
+		request.setAttribute( "typesEquipements",typesEquipements );
+
+	    this.getServletContext().getRequestDispatcher( "/putOffice.jsp" ).forward( request, response );
+		
 	}
 
 	/**

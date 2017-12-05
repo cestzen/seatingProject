@@ -15,17 +15,24 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 </head>
 <body>
 
-
 	<canvas id="canvas" width="500" height="500"
 		style="background: url(C:/Users/Sylvain/Desktop/Capture.png) no-repeat center center; background-size: contain;">
 
 	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
 	</canvas>
-	<form action="./addBureaux" method="POST">
-		<input type="hidden" id="data" name="data"/> 
-		<input type="submit" id="submit"
-			value="Submit" />
+	<form action="./" method="POST">
+		<label id="labelX"> </label>
+		<label id="labelY"> </label>
+		Nom bureau: <input type="text" name="name"><br />
+		Nom de l'équipement: <input type="text" name="nameEquipment" /><br/>
+		Type d'equipement
+		    <SELECT name="nom" size="1">
+			    <c:forEach var="item" items="${typesEquipements}" >
+				    <OPTION><c:out value="${item}" />
+				</c:forEach>
+		    </SELECT>
+		<input type="submit" id="submit" value="Submit" />
 	</form>
 	<script>
 
