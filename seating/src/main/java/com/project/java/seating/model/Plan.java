@@ -14,21 +14,18 @@ import javax.persistence.OneToMany;
 @Entity
 public class Plan {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String nom;
 	private float hauteur;
 	private float largeur;
 	private String path;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="bureauPlan")
+	@JoinColumn(name = "bureauPlan")
 	private List<Bureau> bureaux;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="equipementPlan")
-	private List<Equipement> equipements;
-	
+
 	public Plan() {
-		
+
 	}
 
 	public long getId() {
@@ -71,24 +68,10 @@ public class Plan {
 		this.bureaux = bureaux;
 	}
 
-	public List<Equipement> getEquipements() {
-		return equipements;
-	}
-
-	public void setEquipements(List<Equipement> equipements) {
-		this.equipements = equipements;
-	}
-
-	public void addBureau(Bureau bureau){
-		if(this.bureaux == null)
+	public void addBureau(Bureau bureau) {
+		if (this.bureaux == null)
 			this.bureaux = new ArrayList<>();
 		this.bureaux.add(bureau);
-	}
-	
-	public void addEquipement(Equipement equipement){
-		if(this.equipements == null)
-			this.equipements = new ArrayList<>();
-		this.equipements.add(equipement);
 	}
 
 	public String getPath() {
@@ -99,5 +82,4 @@ public class Plan {
 		this.path = path;
 	}
 
-	
 }

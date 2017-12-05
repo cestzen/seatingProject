@@ -32,7 +32,6 @@ public class AddCollaboratorServlet extends HttpServlet {
 		collaborateurBdd = (CollaborateurBdd) ac.getBean("collaborateurBdd");
 	}
 
-
 	public void setCollaborateurBdd(CollaborateurBdd collaborateurBdd) {
 		this.collaborateurBdd = collaborateurBdd;
 	}
@@ -55,15 +54,21 @@ public class AddCollaboratorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try {
+			collaborateurBdd.create(request.getParameter("lastname"), request.getParameter("name"),
+					request.getParameter("admin") == null || request.getParameter("admin").isEmpty() ? false : true,
+					request.getParameter("date"), request.getParameter("username"), request.getParameter("password"));
 
-		collaborateurBdd.create(request.getParameter("lastname"), request.getParameter("name"),
-				request.getParameter("admin") == null || request.getParameter("admin").isEmpty() ? false : true,
-				request.getParameter("date"), request.getParameter("username"), request.getParameter("password"));
-		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
-		PrintWriter out = response.getWriter();
-		out.println("<font color=green>MESSAGE : Collaborateur cree</font>");
-		rd.include(request, response);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+			PrintWriter out = response.getWriter();
+			out.println("<font color=green>MESSAGE : Collaborateur cree</font>");
+			rd.include(request, response);
+		} catch (Exception e) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
+			PrintWriter out = response.getWriter();
+			out.println("<font color=red>MESSAGE : OPERATION ECHUE</font>");
+			rd.include(request, response);
+		}
 	}
 
 }
