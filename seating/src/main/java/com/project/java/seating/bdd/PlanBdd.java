@@ -43,7 +43,7 @@ public class PlanBdd {
 		projectEntityManager.ouvertureEntity();
 
 		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession()
-				.createQuery("FROM Collaborateur WHERE plan=:plan")
+				.createQuery("FROM Plan WHERE nom=:plan")
 				.setParameter("plan", name).list();
 		projectEntityManager.fermetureEntity();
 

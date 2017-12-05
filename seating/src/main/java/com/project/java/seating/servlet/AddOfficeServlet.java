@@ -64,20 +64,10 @@ public class AddOfficeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getParameter("data"));
 		
-		//typeEquipementBdd.create("test");
-		
-		//String[] typesEquipements = addOfficeService.getTypesEquipement();
-		
-		Plan plan = planBdd.getPlan(request.getParameter("nomPlan"));
-		String[] varPlan = new String[4];
-		varPlan[0] = plan.getHauteur()+"";
-		varPlan[1] = plan.getLargeur()+"";
-		varPlan[2] = plan.getNom()+"";
-		varPlan[3] = plan.getPath()+"";
-		
-		request.setAttribute( "varPlan",varPlan );
+		Plan plan = planBdd.getPlan(request.getParameter("emplacementPlan"));
+		//Plan plan = planBdd.getPlan("planTest");
+		request.setAttribute("path",plan.getPath() );
 
 		
 		List<TypeEquipement> typeEquipementList = typeEquipementBdd.getAll();
@@ -86,7 +76,7 @@ public class AddOfficeServlet extends HttpServlet {
 		for(int i = 0; i < typeEquipementList.size() ; i++)
 			typesEquipements[i] = typeEquipementList.get(i).getNom();
 		
-		request.setAttribute( "typesEquipements",typesEquipements );
+		request.setAttribute("typesEquipements",typesEquipements );
 
 	    this.getServletContext().getRequestDispatcher( "/putOffice.jsp" ).forward( request, response );
 		
@@ -98,26 +88,7 @@ public class AddOfficeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-
-			Batiment batiment = new Batiment();
-			batiment.setNomBatiment("testBatiment");
-			Plan plan = new Plan();
-
-			JSONArray json = new JSONArray(request.getParameter("data"));
-
-			for (int i = 0; i < json.length(); i++) {
-				Bureau bureau = jsonTool.createObject(json.getJSONObject(i).toString());
-				plan.addBureau(bureau);
-			}
-
-			batiment.addPlan(plan);
-
-			batimentBdd.create(batiment);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 }

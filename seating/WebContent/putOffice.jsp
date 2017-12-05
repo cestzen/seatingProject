@@ -11,12 +11,13 @@
 if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
 	response.sendRedirect("login.jsp");
 }
+
 %>
 </head>
 <body>
 
 	<canvas id="canvas" width="500" height="500"
-		style="background: url(${typesEquipements[3]}) no-repeat center center; background-size: contain;">
+		style="background: url(${path}) no-repeat center center; background-size: contain;">
 
 	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
@@ -75,8 +76,6 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 					aEffacer = true;
 					array.splice(i, 1);
 					
-	
-					
 				}
 			}
 		
@@ -91,7 +90,6 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 				context.strokeRect(hor, ver, largeur, hauteur);
 				}
 					
-			   
 		}else{
 			context.fillStyle = "grey";
 			context.strokeRect(xval-(largeur/2), yval-(hauteur/2), largeur, hauteur);
