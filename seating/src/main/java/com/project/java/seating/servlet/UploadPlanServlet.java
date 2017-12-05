@@ -21,6 +21,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.project.java.seating.bdd.BatimentBdd;
 import com.project.java.seating.model.Batiment;
+import com.project.java.seating.model.Plan;
 import com.project.java.seating.services.ShowSeatingPlanService;
 
 /**
@@ -32,43 +33,60 @@ public class UploadPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BatimentBdd batimentBdd;
 	private ApplicationContext ac;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UploadPlanServlet() {
-        super();
-        ac = new ClassPathXmlApplicationContext("beans.xml");
-        batimentBdd = (BatimentBdd) ac.getBean("batimentBdd");
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		List<Batiment> batiments = batimentBdd.getAll();
-		List<String> nomBatiments = new ArrayList<>();
-		for(Batiment batiment : batiments)
-			nomBatiments.add(batiment.getNomBatiment());
-		request.setAttribute( "nomsBatiments", nomBatiments );
-
-	    this.getServletContext().getRequestDispatcher( "/uploadPlan.jsp" ).forward( request, response );
+	public UploadPlanServlet() {
+		super();
+		ac = new ClassPathXmlApplicationContext("beans.xml");
+		batimentBdd = (BatimentBdd) ac.getBean("batimentBdd");
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-	    
-	    File file = new File(new File("C:/Users/Public/plans"), fileName);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		List<Batiment> batiments = batimentBdd.getAll();
+		List<String> nomBatiments = new ArrayList<>();
+		for (Batiment batiment : batiments)
+			nomBatiments.add(batiment.getNomBatiment());
+		request.setAttribute("nomsBatiments", nomBatiments);
 
-	    try (InputStream input = filePart.getInputStream()) {
-	        Files.copy(input, file.toPath());
-	    }
-	    response.getWriter().append("Reussi à télécharger ").append(fileName);
+		this.getServletContext().getRequestDispatcher("/uploadPlan.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Plan plan = new Plan();
+		plan.setNom(request.getParameter("planName"));
+		plan.setLargeur(Float.parseFloat(request.getParameter("largeur")));
+		plan.setHauteur(Float.parseFloat(request.getParameter("hauteur")));
+
+		Part filePart = request.getPart("file"); // Retrieves <input type="file"
+													// name="file">
+		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE
+																								// fix.
+
+		File file = new File(new File("C:/Users/Public/plans/"), fileName);
+		new File("C:/Users/Public/plans").mkdirs();
+
+		try (InputStream input = filePart.getInputStream()) {
+			Files.copy(input, file.toPath());
+		}
+		plan.setPath("C:/Users/Public/plans" + fileName);
+		Batiment batiment = batimentBdd.get(request.getParameter("nomBatiment"));
+		batiment.addPlan(plan);
+		batimentBdd.save(batiment);
+
+		response.getWriter().append("Reussi à télécharger ").append(fileName);
 	}
 
 }
