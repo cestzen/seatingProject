@@ -36,7 +36,7 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 					Type d'equipement
 					    <SELECT name="nom" size="1" id="nameTypeEquipment">
 						    <c:forEach var="item" items="${typesEquipements}" >
-							    <OPTION value="${item}"><c:out value="${item}" />
+							    <OPTION><c:out value="${item}" />
 							</c:forEach>
 					    </SELECT>
 					    <br/><br/>
@@ -69,23 +69,48 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
  	var nameEquipment = document.getElementById('nameEquipment');
  	
  	var nameTypeEquipmentSelect = document.getElementById("nameTypeEquipment");
- 	var nameTypeEquipment = nameTypeEquipmentSelect.options[nameTypeEquipmentSelect.selectedIndex].value;
-
+ 	
  	var nameUserSelect = document.getElementById("nameUser");
- 	var nameUser = nameUserSelect.options[nameUserSelect.selectedIndex].value;
-
+ 	
  	var bureauSelectionner = null ;
  	var indexBureauSelectionner = null ;
   
-  	var submit = document.getElementById('submit');
-  	submit.onclick = function(){
-		$('#data').val(JSON.stringify(array));
-	  
-  	};
+  	
+  	
+  	function delOffice(){
+
+  		array.splice(indexBureauSelectionner, 1);
+  		bureauSelectionner = null;
+  		indexBureauSelectionner = null;
+  		
+  		context.clearRect(0, 0, canvas.width, canvas.height);
+  		for(var i = 0; i < array.length; i++)
+  		{
+  		
+  	    var hor = array[i]["x"]-(largeur/2) ;
+  	    var ver = array[i]["y"] -(hauteur/2) ;
+  		
+  		context.strokeRect(hor, ver, largeur, hauteur);
+  		}
+    }
+  	
+  	 function selectItemByValue(elmnt, value){
+
+  		  for(var i=0; i < elmnt.options.length; i++)
+  		  {
+  		    if(elmnt.options[i].value === value) {
+  		      elmnt.selectedIndex = i;
+  		      break;
+  		    }
+  		  }
+  		}
 	
   	element.onclick = function(e) {
 		var aModifier = false;
 		
+		var nameTypeEquipment = nameTypeEquipmentSelect.options[nameTypeEquipmentSelect.selectedIndex].text;
+		var nameUser = nameUserSelect.options[nameUserSelect.selectedIndex].text;
+
 		var rect = canvas.getBoundingClientRect();
 		eX = e.clientX - rect.left;
 		eY = e.clientY - rect.top
@@ -149,7 +174,6 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 			context.fillStyle = "grey";
 			context.strokeRect(xval-(largeur/2), yval-(hauteur/2), largeur, hauteur);
 			bureau = {nom:inputName.value,x:xval,y:yval,nomEquipment:nameEquipment.value,nomTypeEquipment:nameTypeEquipment,nomUtilisateur:nameUser};
-			alert(JSON.stringify(bureau));
 			array.push(bureau); 
 			inputName.value = "";
 			nameEquipment.value = "";
@@ -160,33 +184,9 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 
   };
   
-  function delOffice(){
-
-		array.splice(indexBureauSelectionner, 1);
-		bureauSelectionner = null;
-		indexBureauSelectionner = null;
-		
-		context.clearRect(0, 0, canvas.width, canvas.height);
-		for(var i = 0; i < array.length; i++)
-		{
-		
-	    var hor = array[i]["x"]-(largeur/2) ;
-	    var ver = array[i]["y"] -(hauteur/2) ;
-		
-		context.strokeRect(hor, ver, largeur, hauteur);
-		}
-  }
   
-  function selectItemByValue(elmnt, value){
-
-	  for(var i=0; i < elmnt.options.length; i++)
-	  {
-	    if(elmnt.options[i].value === value) {
-	      elmnt.selectedIndex = i;
-	      break;
-	    }
-	  }
-	}
+  
+ 
 </script>
 </body>
 </html>
