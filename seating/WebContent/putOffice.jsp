@@ -143,12 +143,12 @@
 		for (var i = 0; i < array.length; i++) {
 			
 			   var hor = array[i]["x"] ;
-			   var clientX1 = xval -(largeur/2) ;
-			   var clientX2 = xval +(largeur/2) ;
+			   var clientX1 = xval -(largeur) ;
+			   var clientX2 = xval +(largeur) ;
 			   
 			   var ver = array[i]["y"] ;
-			   var clientY1 = yval -(hauteur/2) ;
-			   var clientY2 = yval +(hauteur/2) ;
+			   var clientY1 = yval -(hauteur) ;
+			   var clientY2 = yval +(hauteur) ;
 			
 				if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
 					aModifier = true;
