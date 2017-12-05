@@ -18,10 +18,14 @@
 	<bean id="batimentBdd" class="com.project.java.seating.bdd.BatimentBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
+	<bean id="typeEquipementBdd" class="com.project.java.seating.bdd.TypeEquipementBdd">
+		<property name="projectEntityManager" ref="projectEntityManager"></property>
+	</bean>
 	<bean id="showSeatingPlanService"
 		class="com.project.java.seating.services.ShowSeatingPlanService">
 		<property name="planBdd" ref="planBdd"></property>
 	</bean>
+
 	
 
 
