@@ -15,6 +15,9 @@
 	<bean id="planBdd" class="com.project.java.seating.bdd.PlanBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
+	<bean id="bureauBdd" class="com.project.java.seating.bdd.BureauBdd">
+		<property name="projectEntityManager" ref="projectEntityManager"></property>
+	</bean>
 	<bean id="batimentBdd" class="com.project.java.seating.bdd.BatimentBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
