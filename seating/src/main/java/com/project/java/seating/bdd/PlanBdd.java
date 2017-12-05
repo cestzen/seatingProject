@@ -41,7 +41,6 @@ public class PlanBdd {
 	public Plan getPlan(String name) {
 
 		projectEntityManager.ouvertureEntity();
-		System.out.println(name);
 		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession()
 				.createQuery("FROM Plan WHERE nom=:plan")
 				.setParameter("plan", name).list();

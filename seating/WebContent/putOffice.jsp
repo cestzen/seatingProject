@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html >
@@ -6,11 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="http://code.jquery.com/jquery-1.10.2.js"
 	type="text/javascript"></script>
-<title>Insert title here</title>
+<title>Plan</title>
 <%
 if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
 	response.sendRedirect("login.jsp");
 }
+
 
 %>
 </head>
@@ -22,19 +25,34 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
 	</canvas>
-	<form action="./" method="POST">
 		<label id="labelX"> </label>
 		<label id="labelY"> </label>
-		Nom bureau: <input type="text" name="name"><br />
-		Nom de l'équipement: <input type="text" name="nameEquipment" /><br/>
-		Type d'equipement
-		    <SELECT name="nom" size="1">
-			    <c:forEach var="item" items="${typesEquipements}" >
-				    <OPTION><c:out value="${item}" />
-				</c:forEach>
-		    </SELECT>
-		<input type="submit" id="submit" value="Submit" />
-	</form>
+		<div style="display:inline-block;vertical-align:top;">
+			<div style="display:inline-block;vertical-align:top;">
+				Nom bureau: <input type="text" name="name" id="inputName"><br />
+			</div>
+			<div style="display:inline-block;vertical-align:top;">
+					Nom de l'équipement: <input type="text" name="nameEquipment" id="nameEquipment"/><br/>
+					Type d'equipement
+					    <SELECT name="nom" size="1" id="nameTypeEquipment">
+						    <c:forEach var="item" items="${typesEquipements}" >
+							    <OPTION><c:out value="${item}" />
+							</c:forEach>
+					    </SELECT>
+					    <br/><br/>
+					 Nom de l'utilisateur
+					 	<SELECT name="nom" size="1" id="nameUser">
+						    <c:forEach var="item" items="${collaborateurs}" >
+							    <OPTION><c:out value="${item}" />
+							</c:forEach>
+					    </SELECT>
+			</div>
+			<div style="display:inline-block;vertical-align:top;">
+				<button style="margin-left:30px;" id="submit" onclick="delOffice();" >Delete</button>
+			</div>
+		</div>
+	
+	
 	<script>
 
 	var array = [];
@@ -42,12 +60,22 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 	var context = canvas.getContext('2d');
 
 
-	var e=event || window.event;
+	//var e=event || window.event;
 	var largeur = 40;
 	var hauteur = 40;
 
  	var element = document.getElementById('canvas');
- 	var bureauSelectionner ;
+ 	var inputName = document.getElementById('inputName');
+ 	var nameEquipment = document.getElementById('nameEquipment');
+ 	
+ 	var nameTypeEquipmentSelect = document.getElementById("nameTypeEquipment");
+ 	var nameTypeEquipment = nameTypeEquipmentSelect.options[nameTypeEquipmentSelect.selectedIndex].value;
+
+ 	var nameUserSelect = document.getElementById("nameUser");
+ 	var nameUser = nameUserSelect.options[nameUserSelect.selectedIndex].value;
+
+ 	var bureauSelectionner = null ;
+ 	var indexBureauSelectionner = null ;
   
   	var submit = document.getElementById('submit');
   	submit.onclick = function(){
@@ -55,11 +83,34 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 	  
   	};
 	
-  	element.onclick = function() {
+  	element.onclick = function(e) {
 		var aModifier = false;
+		
+		var rect = canvas.getBoundingClientRect();
+		eX = e.clientX - rect.left;
+		eY = e.clientY - rect.top
 
-		var xval = event.clientX - 10 ;
-		var yval = event.clientY -5;
+		var xval = eX - 10 ;
+		var yval = eY -5;
+		if(bureauSelectionner != null){
+			array[indexBureauSelectionner]["nom"] = inputName.value;
+			array[indexBureauSelectionner]["nomEquipment"] = nameEquipment.value;
+			array[indexBureauSelectionner]["nomTypeEquipment"] = nomTypeEquipment;
+			array[indexBureauSelectionner]["nomUtilisateur"] = nomUtilisateur;
+			inputName.value = "";
+			nameEquipment.value = "";
+			nameTypeEquipmentSelect.selectedIndex = 0;
+			nameUserSelect.selectedIndex = 0;
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			for(var i = 0; i < array.length; i++)
+			{
+			
+		    var hor = array[i]["x"]-(largeur/2) ;
+		    var ver = array[i]["y"] -(hauteur/2) ;
+			
+			context.strokeRect(hor, ver, largeur, hauteur);
+			}
+		}
 
 		for (var i = 0; i < array.length; i++) {
 			
@@ -72,11 +123,10 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 			   var clientY2 = yval +(hauteur/2) ;
 			
 				if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
-					alert("coucou");
 					aModifier = true;
-					bureauSelectionner = {nom:'table1',x:hor,y:ver};
-					context.fillStyle = "#FF0000";
-					//context.strokeRect(clientX1, clientY1, largeur, hauteur);
+					bureauSelectionner = {nom:array[i]["nom"],x:hor,y:ver};
+					indexBureauSelectionner = i;
+					inputName.value = array[i]["nom"];
 					
 				}
 			}
@@ -84,21 +134,43 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 		if(aModifier){
 			
 
-			var bureauX = bureauSelectionner["x"] -(largeur/2);
-			var bureauY = bureauSelectionner["y"] -(hauteur/2);
-			context.fillStyle = "pink";
-			context.strokeRect(bureauX, bureauY, largeur, hauteur);
+			var bureauX = bureauSelectionner['x'] -(largeur/2);
+			var bureauY = bureauSelectionner['y'] -(hauteur/2);
+			context.fillRect(bureauX, bureauY, largeur, hauteur);
 			
 					
 		}else{
+			bureauSelectionner = null;
 			context.fillStyle = "grey";
 			context.strokeRect(xval-(largeur/2), yval-(hauteur/2), largeur, hauteur);
-			bureau = {nom:'table1',x:xval,y:yval};
-		    array.push(bureau); 
+			bureau = {nom:inputName.value,x:xval,y:yval,nomEquipment:nameEquipment.value,nomTypeEquipment:nameTypeEquipment,nomUtilisateur:nameUser};
+			alert(JSON.stringify(bureau));
+			array.push(bureau); 
+			inputName.value = "";
+			nameEquipment.value = "";
+			nameTypeEquipmentSelect.selectedIndex = 0;
+			nameUserSelect.selectedIndex = 0;
 		}
 		
 
   };
+  
+  function delOffice(){
+
+		array.splice(indexBureauSelectionner, 1);
+		bureauSelectionner = null;
+		indexBureauSelectionner = null;
+		
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		for(var i = 0; i < array.length; i++)
+		{
+		
+	    var hor = array[i]["x"]-(largeur/2) ;
+	    var ver = array[i]["y"] -(hauteur/2) ;
+		
+		context.strokeRect(hor, ver, largeur, hauteur);
+		}
+  }
     
 </script>
 </body>
