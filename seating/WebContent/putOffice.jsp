@@ -36,7 +36,7 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 					Type d'equipement
 					    <SELECT name="nom" size="1" id="nameTypeEquipment">
 						    <c:forEach var="item" items="${typesEquipements}" >
-							    <OPTION><c:out value="${item}" />
+							    <OPTION value="${item}"><c:out value="${item}" />
 							</c:forEach>
 					    </SELECT>
 					    <br/><br/>
@@ -95,8 +95,9 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 		if(bureauSelectionner != null){
 			array[indexBureauSelectionner]["nom"] = inputName.value;
 			array[indexBureauSelectionner]["nomEquipment"] = nameEquipment.value;
-			array[indexBureauSelectionner]["nomTypeEquipment"] = nomTypeEquipment;
-			array[indexBureauSelectionner]["nomUtilisateur"] = nomUtilisateur;
+			array[indexBureauSelectionner]["nomTypeEquipment"] = nameTypeEquipment;
+			
+			array[indexBureauSelectionner]["nomUtilisateur"] = nameUser;
 			inputName.value = "";
 			nameEquipment.value = "";
 			nameTypeEquipmentSelect.selectedIndex = 0;
@@ -127,6 +128,10 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 					bureauSelectionner = {nom:array[i]["nom"],x:hor,y:ver};
 					indexBureauSelectionner = i;
 					inputName.value = array[i]["nom"];
+					nameEquipment.value =array[indexBureauSelectionner]["nomEquipment"];
+
+					selectItemByValue(nameTypeEquipmentSelect,array[indexBureauSelectionner]["nomTypeEquipment"]) ;
+					selectItemByValue(nameUserSelect ,array[indexBureauSelectionner]["nomUtilisateur"]);
 					
 				}
 			}
@@ -171,7 +176,17 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 		context.strokeRect(hor, ver, largeur, hauteur);
 		}
   }
-    
+  
+  function selectItemByValue(elmnt, value){
+
+	  for(var i=0; i < elmnt.options.length; i++)
+	  {
+	    if(elmnt.options[i].value === value) {
+	      elmnt.selectedIndex = i;
+	      break;
+	    }
+	  }
+	}
 </script>
 </body>
 </html>
