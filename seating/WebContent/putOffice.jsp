@@ -47,6 +47,7 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
 	var hauteur = 40;
 
  	var element = document.getElementById('canvas');
+ 	var bureauSelectionner ;
   
   	var submit = document.getElementById('submit');
   	submit.onclick = function(){
@@ -55,40 +56,39 @@ if (session.getAttribute("admin") == null || !session.getAttribute("admin").equa
   	};
 	
   	element.onclick = function() {
-		var aEffacer = false;
+		var aModifier = false;
 
 		var xval = event.clientX - 10 ;
 		var yval = event.clientY -5;
 
 		for (var i = 0; i < array.length; i++) {
 			
-			   var hor = array[i]["hor"] ;
+			   var hor = array[i]["x"] ;
 			   var clientX1 = xval -(largeur/2) ;
 			   var clientX2 = xval +(largeur/2) ;
 			   
-			   var ver = array[i]["ver"] ;
+			   var ver = array[i]["y"] ;
 			   var clientY1 = yval -(hauteur/2) ;
 			   var clientY2 = yval +(hauteur/2) ;
-			   
 			
 				if(hor > clientX1 && hor < clientX2 && ver > clientY1  && ver < clientY2){
-	
-					aEffacer = true;
-					array.splice(i, 1);
+					alert("coucou");
+					aModifier = true;
+					bureauSelectionner = {nom:'table1',x:hor,y:ver};
+					context.fillStyle = "#FF0000";
+					//context.strokeRect(clientX1, clientY1, largeur, hauteur);
 					
 				}
 			}
 		
-		if(aEffacer){
-				context.clearRect(0, 0, canvas.width, canvas.height);
-				for(var i = 0; i < array.length; i++)
-				{
-				
-			    var hor = array[i]["hor"]-(largeur/2) ;
-			    var ver = array[i]["ver"] -(hauteur/2) ;
-				
-				context.strokeRect(hor, ver, largeur, hauteur);
-				}
+		if(aModifier){
+			
+
+			var bureauX = bureauSelectionner["x"] -(largeur/2);
+			var bureauY = bureauSelectionner["y"] -(hauteur/2);
+			context.fillStyle = "pink";
+			context.strokeRect(bureauX, bureauY, largeur, hauteur);
+			
 					
 		}else{
 			context.fillStyle = "grey";

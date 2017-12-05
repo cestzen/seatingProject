@@ -65,20 +65,6 @@ public class AddOfficeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		Plan plan = planBdd.getPlan(request.getParameter("emplacementPlan"));
-		//Plan plan = planBdd.getPlan("planTest");
-		request.setAttribute("path",plan.getPath() );
-
-		
-		List<TypeEquipement> typeEquipementList = typeEquipementBdd.getAll();
-		String[] typesEquipements = new String[typeEquipementList.size()];
-		
-		for(int i = 0; i < typeEquipementList.size() ; i++)
-			typesEquipements[i] = typeEquipementList.get(i).getNom();
-		
-		request.setAttribute("typesEquipements",typesEquipements );
-
-	    this.getServletContext().getRequestDispatcher( "/putOffice.jsp" ).forward( request, response );
 		
 	}
 
@@ -88,7 +74,7 @@ public class AddOfficeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 
 }
