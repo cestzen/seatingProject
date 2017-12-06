@@ -76,11 +76,14 @@ public class AddEquipementService extends GeneralServletService {
 
 	public void addEquipement(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws IOException, ServletException {
-		Equipement eq = equipementBdd.create(request.getParameter("externalId"), request.getParameter("type"));
-		collaborateurBdd.addEquipement(request.getParameter("collab").split(":")[0], eq);
+		try {
+			Equipement eq = equipementBdd.create(request.getParameter("externalId"), request.getParameter("type"));
+			collaborateurBdd.addEquipement(request.getParameter("collab").split(":")[0], eq);
 
-		this.successRedirect("Equipement cree", "/loginSuccess.jsp", servletContext, request, response);
-
+			this.successRedirect("Equipement cree", "/loginSuccess.jsp", servletContext, request, response);
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
+		}
 	}
 
 }

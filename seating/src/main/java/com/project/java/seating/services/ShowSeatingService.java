@@ -21,6 +21,7 @@ import com.project.java.seating.model.Plan;
 
 /**
  * service for viewing the existing plans
+ * 
  * @author beril
  *
  */
@@ -41,7 +42,6 @@ public class ShowSeatingService extends GeneralServletService {
 		this.batimentBdd = batimentBdd;
 	}
 
-
 	private List<String> getBuildings() {
 		List<Batiment> batiments = batimentBdd.getAll();
 		List<String> nomBatiments = new ArrayList<>();
@@ -56,16 +56,20 @@ public class ShowSeatingService extends GeneralServletService {
 	 */
 	public void getBuildings(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws ServletException, IOException {
+		try {
+			List<String> nomBatiments = getBuildings();
 
-		List<String> nomBatiments = getBuildings();
+			request.setAttribute("nomsBatiments", nomBatiments);
 
-		request.setAttribute("nomsBatiments", nomBatiments);
-
-		servletContext.getRequestDispatcher("/chooseBatiment.jsp").forward(request, response);
+			servletContext.getRequestDispatcher("/chooseBatiment.jsp").forward(request, response);
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
+		}
 	}
 
 	/**
 	 * lists the existing plans for a chosen building
+	 * 
 	 * @param request
 	 * @param response
 	 * @param servletContext
@@ -74,30 +78,39 @@ public class ShowSeatingService extends GeneralServletService {
 	 */
 	public void getPlans(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws ServletException, IOException {
-		List<Batiment> batiments = batimentBdd.getAll();
-		for (Batiment batiment : batiments) {
-			if (batiment.getNomBatiment().equals(request.getParameter("nomBatiment"))) {
-				List<String> nomsPlans = new ArrayList<>();
-				for (Plan plan : batiment.getPlanList()) {
-					nomsPlans.add(plan.getNom());
+		try {
+			List<Batiment> batiments = batimentBdd.getAll();
+			for (Batiment batiment : batiments) {
+				if (batiment.getNomBatiment().equals(request.getParameter("nomBatiment"))) {
+					List<String> nomsPlans = new ArrayList<>();
+					for (Plan plan : batiment.getPlanList()) {
+						nomsPlans.add(plan.getNom());
+					}
+					request.setAttribute("nomsPlans", nomsPlans);
+					servletContext.getRequestDispatcher("/choosePlan.jsp").forward(request, response);
+					return;
 				}
-				request.setAttribute("nomsPlans", nomsPlans);
-				servletContext.getRequestDispatcher("/choosePlan.jsp").forward(request, response);
-				return;
 			}
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
 		}
 	}
 
 	public void uploadPlanGetBuildings(HttpServletRequest request, HttpServletResponse response,
 			ServletContext servletContext) throws ServletException, IOException {
-		List<String> nomBatiments = getBuildings();
-		request.setAttribute("nomsBatiments", nomBatiments);
+		try {
+			List<String> nomBatiments = getBuildings();
+			request.setAttribute("nomsBatiments", nomBatiments);
 
-		servletContext.getRequestDispatcher("/uploadPlan.jsp").forward(request, response);
+			servletContext.getRequestDispatcher("/uploadPlan.jsp").forward(request, response);
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
+		}
 	}
 
 	/**
 	 * uploads the plans to view
+	 * 
 	 * @param request
 	 * @param response
 	 * @param servletContext

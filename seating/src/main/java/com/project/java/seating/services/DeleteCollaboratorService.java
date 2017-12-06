@@ -38,14 +38,17 @@ public class DeleteCollaboratorService extends GeneralServletService {
 	 */
 	public void createChoices(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws ServletException, IOException {
-		List<Collaborateur> collaborateurs = collaborateurBdd.getAll();
-		List<String> nomCollaborateurs = new ArrayList<>();
-		for (Collaborateur collab : collaborateurs)
-			nomCollaborateurs.add(collab.getId() + ": " + collab.getNom() + ", " + collab.getPrenom());
-		request.setAttribute("collaborateurs", nomCollaborateurs);
+		try {
+			List<Collaborateur> collaborateurs = collaborateurBdd.getAll();
+			List<String> nomCollaborateurs = new ArrayList<>();
+			for (Collaborateur collab : collaborateurs)
+				nomCollaborateurs.add(collab.getId() + ": " + collab.getNom() + ", " + collab.getPrenom());
+			request.setAttribute("collaborateurs", nomCollaborateurs);
 
-		servletContext.getRequestDispatcher("/deleteCollaborator.jsp").forward(request, response);
-
+			servletContext.getRequestDispatcher("/deleteCollaborator.jsp").forward(request, response);
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
+		}
 	}
 
 	/**

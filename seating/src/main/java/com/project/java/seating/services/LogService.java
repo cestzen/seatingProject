@@ -30,36 +30,42 @@ public class LogService extends GeneralServletService {
 
 	public void logIn(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws IOException, ServletException {
+		try {
+			// get request parameters for userID and password
+			String user = request.getParameter("username");
+			String pwd = request.getParameter("password");
 
-		// get request parameters for userID and password
-		String user = request.getParameter("username");
-		String pwd = request.getParameter("password");
+			Collaborateur collaborateur = collaborateurBdd.findCollaborateur(user, pwd);
+			if (collaborateur != null) {
+				session = request.getSession(true);
 
-		Collaborateur collaborateur = collaborateurBdd.findCollaborateur(user, pwd);
-		if (collaborateur != null) {
-			session = request.getSession(true);
-
-			if (collaborateur.getEstAdministrateur())
-				session.setAttribute("admin", "admin");
-			// setting cookie to expiry in 5 mins
-			session.setMaxInactiveInterval(60 * 5);
-			session.setAttribute("user", user);
-			response.sendRedirect("/seating/loginSuccess.jsp");
-		} else {
-			this.errorRedirect("UTILISATEUR OU MOT DE PASSE INCORRECTE", "/login.jsp", servletContext, request,
-					response);
+				if (collaborateur.getEstAdministrateur())
+					session.setAttribute("admin", "admin");
+				// setting cookie to expiry in 5 mins
+				session.setMaxInactiveInterval(60 * 5);
+				session.setAttribute("user", user);
+				response.sendRedirect("/seating/loginSuccess.jsp");
+			} else {
+				this.errorRedirect("UTILISATEUR OU MOT DE PASSE INCORRECTE", "/login.jsp", servletContext, request,
+						response);
+			}
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
 		}
-
 	}
 
 	public void logOut(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws IOException, ServletException {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
+		try {
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				session.invalidate();
+			}
+
+			this.successRedirect("DECONNECTE", "/login.jsp", servletContext, request, response);
+
+		} catch (Exception e) {
+			this.errorRedirect("OPERATION ECHUE", "/loginSuccess.jsp", servletContext, request, response);
 		}
-
-		this.successRedirect("DECONNECTE", "/login.jsp", servletContext, request, response);
 	}
-
 }
