@@ -19,7 +19,7 @@ public class Batiment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn
+	@JoinColumn(name="batimentId")
 	private List<Plan> planList;
 	@Column(unique=true)
 	private String nomBatiment;

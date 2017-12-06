@@ -14,7 +14,7 @@ public class Equipement {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="typeEquipementId")
 	private TypeEquipement typeEquipement;
 	@Column(unique = true)
 	private String externalId;

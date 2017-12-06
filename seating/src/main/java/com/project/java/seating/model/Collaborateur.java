@@ -25,7 +25,7 @@ public class Collaborateur {
 	private Boolean estAdministrateur;
 	private String dateArriver;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="equipementCollaborateur")
+	@JoinColumn(name="collaborateurId")
 	private List<Equipement> equipements;
 
 	public Collaborateur() {

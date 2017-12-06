@@ -23,7 +23,7 @@ public class Plan {
 	private float largeur;
 	private String path;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "bureauPlan")
+	@JoinColumn(name = "planId")
 	private List<Bureau> bureaux;
 
 	public Plan() {

@@ -83,7 +83,7 @@ public class UploadPlanServlet extends HttpServlet {
 		try (InputStream input = filePart.getInputStream()) {
 			Files.copy(input, file.toPath());
 		}
-		plan.setPath("C:/Users/Public/plans" + fileName);
+		plan.setPath("C:/Users/Public/plans/" + fileName);
 		Batiment batiment = batimentBdd.get(request.getParameter("nomBatiment"));
 		batiment.addPlan(plan);
 		batimentBdd.save(batiment);

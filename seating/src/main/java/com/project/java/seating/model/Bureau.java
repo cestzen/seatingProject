@@ -26,10 +26,10 @@ public class Bureau {
 	@JsonProperty("x")
 	private float x;
 	@OneToOne
-	@JoinColumn
+	@JoinColumn(name="collaborateurId")
 	private Collaborateur collaborateur;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="equipementBureau")
+	@JoinColumn(name="bureauId")
 	private List<Equipement> equipements;
 
 	
