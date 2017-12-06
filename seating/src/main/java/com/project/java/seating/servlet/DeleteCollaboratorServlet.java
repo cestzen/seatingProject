@@ -1,11 +1,6 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.project.java.seating.bdd.CollaborateurBdd;
-import com.project.java.seating.model.Collaborateur;
+import com.project.java.seating.services.DeleteCollaboratorService;
 
 /**
  * Servlet implementation class AddCollaborator
@@ -23,8 +17,9 @@ import com.project.java.seating.model.Collaborateur;
 @WebServlet(name = "deleteCollab", urlPatterns = { "/deleteCollab" })
 public class DeleteCollaboratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CollaborateurBdd collaborateurBdd;
+
 	private ApplicationContext ac;
+	private DeleteCollaboratorService deleteCollaboratorService;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -32,11 +27,7 @@ public class DeleteCollaboratorServlet extends HttpServlet {
 	public DeleteCollaboratorServlet() {
 		super();
 		ac = new ClassPathXmlApplicationContext("beans.xml");
-		collaborateurBdd = (CollaborateurBdd) ac.getBean("collaborateurBdd");
-	}
-
-	public void setCollaborateurBdd(CollaborateurBdd collaborateurBdd) {
-		this.collaborateurBdd = collaborateurBdd;
+		deleteCollaboratorService = (DeleteCollaboratorService) ac.getBean("deleteCollaboratorService");
 	}
 
 	/**
@@ -45,13 +36,7 @@ public class DeleteCollaboratorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Collaborateur> collaborateurs = collaborateurBdd.getAll();
-		List<String> nomCollaborateurs = new ArrayList<>();
-		for (Collaborateur collab : collaborateurs)
-			nomCollaborateurs.add(collab.getId() + ": " + collab.getNom() + ", " + collab.getPrenom());
-		request.setAttribute("collaborateurs", nomCollaborateurs);
-
-		this.getServletContext().getRequestDispatcher("/deleteCollaborator.jsp").forward(request, response);
+		deleteCollaboratorService.createChoices(request, response, this.getServletContext());
 	}
 
 	/**
@@ -60,12 +45,8 @@ public class DeleteCollaboratorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println(request.getParameter("collab"));
-		collaborateurBdd.deleteCollaborateur(request.getParameter("collab").split(":")[0]);
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/loginSuccess.jsp");
-		PrintWriter out = response.getWriter();
-		out.println("<font color=green>MESSAGE : Collaborateur supprime</font>");
-		rd.include(request, response);
+		deleteCollaboratorService.removeCollaborateur(request, response, this.getServletContext());
+
 	}
 
 }

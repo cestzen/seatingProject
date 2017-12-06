@@ -1,15 +1,15 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.project.java.seating.services.LogService;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -17,28 +17,25 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LogoutServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private LogService logService;
+	private ApplicationContext ac;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-    	if(session != null){
-    		session.invalidate();
-    	}
-    	RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-		PrintWriter out = response.getWriter();
-		out.println("<font color=green>MESSAGE : LOGGED OUT</font>");
-		rd.include(request, response);
+	public LogoutServlet() {
+		super();
+		ac = new ClassPathXmlApplicationContext("beans.xml");
+		logService = (LogService) ac.getBean("logService");
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		logService.logOut(request, response, this.getServletContext());
+	}
 
 }

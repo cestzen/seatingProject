@@ -21,7 +21,6 @@ import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.model.TypeEquipement;
-import com.project.java.seating.services.ShowSeatingPlanService;
 
 @WebServlet("/choosePlan")
 public class ChoosePlanServlet extends HttpServlet {

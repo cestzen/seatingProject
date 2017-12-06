@@ -9,11 +9,43 @@
 		class="com.project.java.seating.persistence.ProjectEntityManager">
 	</bean>
 
-	<bean id="GeneralServletService" abstract="true" />
+	<bean id="generalServletService" abstract="true" />
+
+	<bean id="showSeatingService" class="com.project.java.seating.services.ShowSeatingService"
+		parent="generalServletService">
+		<property name="batimentBdd" ref="batimentBdd"></property>
+	</bean>
 
 	<bean id="addCollaborateurService"
-		class="com.project.java.seating.services.AddCollaborateurService">
+		class="com.project.java.seating.services.AddCollaborateurService"
+		parent="generalServletService">
 		<property name="collaborateurBdd" ref="collaborateurBdd"></property>
+	</bean>
+
+	<bean id="deleteCollaboratorService"
+		class="com.project.java.seating.services.DeleteCollaboratorService"
+		parent="generalServletService">
+		<property name="collaborateurBdd" ref="collaborateurBdd"></property>
+	</bean>
+
+	<bean id="logService" class="com.project.java.seating.services.LogService"
+		parent="generalServletService">
+		<property name="collaborateurBdd" ref="collaborateurBdd"></property>
+	</bean>
+
+	<bean id="addEquipementService" class="com.project.java.seating.services.AddEquipementService"
+		parent="generalServletService">
+		<property name="collaborateurBdd" ref="collaborateurBdd"></property>
+		<property name="typeEquipementBdd" ref="typeEquipementBdd"></property>
+		<property name="equipementBdd" ref="equipementBdd"></property>
+	</bean>
+
+	<bean id="addOfficeService" class="com.project.java.seating.services.AddOfficeService"
+		parent="generalServletService">
+		<property name="collaborateurBdd" ref="collaborateurBdd"></property>
+		<property name="planBdd" ref="planBdd"></property>
+		<property name="equipementBdd" ref="equipementBdd"></property>
+		<property name="bureauBdd" ref="bureauBdd"></property>
 	</bean>
 
 	<bean id="collaborateurBdd" class="com.project.java.seating.bdd.CollaborateurBdd">

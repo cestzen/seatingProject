@@ -1,9 +1,6 @@
 package com.project.java.seating.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.project.java.seating.bdd.CollaborateurBdd;
 import com.project.java.seating.services.AddCollaborateurService;
 
 /**
