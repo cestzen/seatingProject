@@ -23,6 +23,10 @@
 	<p>Désolé, votre navigateur ne supporte pas Canvas.</p>
 
 	</canvas>
+	<p>INSTRUCTIONS: Cliquez sur le canvas. Un carré apparaitra.
+		Choissisez ce carré pour renseigner les infos pour le bureau.</p>
+	<p>Laissez l'id d'equipement vide si aucune equipement n'est
+		associé à ce bureau.</p>
 	<label id="labelX"> </label>
 	<label id="labelY"> </label>
 	<div style="display: inline-block; vertical-align: top;">
@@ -30,7 +34,7 @@
 			Nom bureau: <input type="text" name="name" id="inputName"><br />
 		</div>
 		<div style="display: inline-block; vertical-align: top;">
-			Nom de l'équipement: <input type="text" name="nameEquipment"
+			Id de l'équipement: <input type="text" name="nameEquipment"
 				id="nameEquipment" /><br /> Type d'equipement <SELECT name="nom"
 				size="1" id="nameTypeEquipment">
 				<c:forEach var="item" items="${typesEquipements}">
