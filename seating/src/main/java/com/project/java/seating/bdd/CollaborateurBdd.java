@@ -8,6 +8,11 @@ import com.project.java.seating.model.CollaborateurAncien;
 import com.project.java.seating.model.Equipement;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
+/**
+ * A DAO class that handles operations concerning the collaborators
+ * @author beril
+ *
+ */
 public class CollaborateurBdd {
 
 	private ProjectEntityManager projectEntityManager;

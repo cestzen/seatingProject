@@ -12,6 +12,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.LogService;
 
 /**
+ * servlet for logging in the system
+ */
+/**
  * Servlet implementation class LogInServlet
  */
 @WebServlet("/login")

@@ -16,6 +16,11 @@ import com.project.java.seating.bdd.EquipementBdd;
 import com.project.java.seating.bdd.PlanBdd;
 import com.project.java.seating.model.Bureau;
 
+/**
+ * service for adding new bureau to the plan
+ * @author beril
+ *
+ */
 public class AddOfficeService extends GeneralServletService {
 	private PlanBdd planBdd;
 	private CollaborateurBdd collaborateurBdd;

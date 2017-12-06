@@ -12,6 +12,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.DeleteCollaboratorService;
 
 /**
+ * servlet for deleting a leaving collaborateur
+ */
+
+/**
  * Servlet implementation class AddCollaborator
  */
 @WebServlet(name = "deleteCollab", urlPatterns = { "/deleteCollab" })

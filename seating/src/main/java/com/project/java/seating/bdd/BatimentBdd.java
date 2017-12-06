@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.persistence.ProjectEntityManager;
-
+/**
+ * A DAO class that handles operations concerning the buildings
+ * @author beril
+ *
+ */
 public class BatimentBdd {
 
 	ProjectEntityManager projectEntityManager;
@@ -27,6 +31,11 @@ public class BatimentBdd {
 		return batiments;
 	}
 
+	/**
+	 * gets the list of buildings
+	 * @param id
+	 * @return
+	 */
 	public Batiment get(int id) {
 
 		projectEntityManager.ouvertureEntity();

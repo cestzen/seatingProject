@@ -15,6 +15,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.AddOfficeService;
 
 /**
+ * servlet for adding a new bureau
+ */
+/**
  * Servlet implementation class AddOfficeServlet
  */
 @WebServlet("/addBureaux")

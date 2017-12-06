@@ -7,6 +7,11 @@ import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
+/**
+ * A DAO class that handles operations concerning the office desks
+ * @author beril
+ *
+ */
 public class BureauBdd {
 	private ProjectEntityManager projectEntityManager;
 

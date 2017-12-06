@@ -19,6 +19,11 @@ import com.project.java.seating.bdd.BatimentBdd;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Plan;
 
+/**
+ * service for viewing the existing plans
+ * @author beril
+ *
+ */
 public class ShowSeatingService extends GeneralServletService {
 
 	private BatimentBdd batimentBdd;
@@ -36,6 +41,7 @@ public class ShowSeatingService extends GeneralServletService {
 		this.batimentBdd = batimentBdd;
 	}
 
+
 	private List<String> getBuildings() {
 		List<Batiment> batiments = batimentBdd.getAll();
 		List<String> nomBatiments = new ArrayList<>();
@@ -45,6 +51,9 @@ public class ShowSeatingService extends GeneralServletService {
 		return nomBatiments;
 	}
 
+	/**
+	 * lists the existing buildings
+	 */
 	public void getBuildings(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws ServletException, IOException {
 
@@ -55,6 +64,14 @@ public class ShowSeatingService extends GeneralServletService {
 		servletContext.getRequestDispatcher("/chooseBatiment.jsp").forward(request, response);
 	}
 
+	/**
+	 * lists the existing plans for a chosen building
+	 * @param request
+	 * @param response
+	 * @param servletContext
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void getPlans(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws ServletException, IOException {
 		List<Batiment> batiments = batimentBdd.getAll();
@@ -79,6 +96,14 @@ public class ShowSeatingService extends GeneralServletService {
 		servletContext.getRequestDispatcher("/uploadPlan.jsp").forward(request, response);
 	}
 
+	/**
+	 * uploads the plans to view
+	 * @param request
+	 * @param response
+	 * @param servletContext
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void uploadPlans(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws IOException, ServletException {
 		try {

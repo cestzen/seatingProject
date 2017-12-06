@@ -13,6 +13,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.ShowSeatingService;
 
 /**
+ * servlet for viewing the plans
+ */
+/**
  * Servlet implementation class ShowSeatingServlet
  */
 @WebServlet("/showSeating")

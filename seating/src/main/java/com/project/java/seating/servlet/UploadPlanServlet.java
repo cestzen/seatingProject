@@ -13,6 +13,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.ShowSeatingService;
 
 /**
+ * servlet for uploading a new plan 
+ */
+/**
  * Servlet implementation class UploadPlanServlet
  */
 @MultipartConfig

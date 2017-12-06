@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.project.java.seating.bdd.CollaborateurBdd;
 import com.project.java.seating.model.Collaborateur;
 
+/**
+ * service for deleting a leaving collaborateur
+ * @author beril
+ *
+ */
 public class DeleteCollaboratorService extends GeneralServletService {
 	private CollaborateurBdd collaborateurBdd;
 
@@ -23,6 +28,14 @@ public class DeleteCollaboratorService extends GeneralServletService {
 		this.collaborateurBdd = collaborateurBdd;
 	}
 
+	/**
+	 * lists the existing collaborateurs to choose one to delete
+	 * @param request
+	 * @param response
+	 * @param servletContext
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void createChoices(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws ServletException, IOException {
 		List<Collaborateur> collaborateurs = collaborateurBdd.getAll();
@@ -35,6 +48,14 @@ public class DeleteCollaboratorService extends GeneralServletService {
 
 	}
 
+	/**
+	 * deletes the chosen collaborateur from the active collaborateur table
+	 * @param request
+	 * @param response
+	 * @param servletContext
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void removeCollaborateur(HttpServletRequest request, HttpServletResponse response,
 			ServletContext servletContext) throws IOException, ServletException {
 		collaborateurBdd.deleteCollaborateur(request.getParameter("collab").split(":")[0]);

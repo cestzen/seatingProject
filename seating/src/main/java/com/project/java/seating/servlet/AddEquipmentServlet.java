@@ -12,6 +12,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.AddEquipementService;
 
 /**
+ * servlet for adding a new equipment
+ */
+/**
  * Servlet implementation class AddEquipement
  */
 @WebServlet(name = "ajoutEquipment", urlPatterns = { "/ajoutEquipment" })

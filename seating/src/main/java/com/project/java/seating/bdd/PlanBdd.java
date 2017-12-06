@@ -6,6 +6,11 @@ import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
+/**
+ * A DAO class that handles operations concerning the plans
+ * @author beril
+ *
+ */
 public class PlanBdd {
 
 	private ProjectEntityManager projectEntityManager;

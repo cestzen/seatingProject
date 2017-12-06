@@ -12,6 +12,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.AddCollaborateurService;
 
 /**
+ * servlet for adding a new collaborateur
+ */
+/**
  * Servlet implementation class AddCollaborator
  */
 @WebServlet(name = "ajoutCollab", urlPatterns = { "/ajoutCollab" })

@@ -22,6 +22,11 @@ import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.model.TypeEquipement;
 
+/**
+ * servlet for choosing an existing plan
+ * @author beril
+ *
+ */
 @WebServlet("/choosePlan")
 public class ChoosePlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

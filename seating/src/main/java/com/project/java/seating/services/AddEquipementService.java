@@ -16,6 +16,12 @@ import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.Equipement;
 import com.project.java.seating.model.TypeEquipement;
 
+/**
+ * Service for adding equipment
+ * 
+ * @author berilb
+ *
+ */
 public class AddEquipementService extends GeneralServletService {
 	private CollaborateurBdd collaborateurBdd;
 	private TypeEquipementBdd typeEquipementBdd;
@@ -37,6 +43,14 @@ public class AddEquipementService extends GeneralServletService {
 		this.equipementBdd = equipementBdd;
 	}
 
+	/**
+	 * preparation of the equipement to add
+	 * @param request
+	 * @param response
+	 * @param servletContext
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void prepareAddEquipement(HttpServletRequest request, HttpServletResponse response,
 			ServletContext servletContext) throws IOException, ServletException {
 		try {

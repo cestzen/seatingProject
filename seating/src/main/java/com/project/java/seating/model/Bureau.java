@@ -28,7 +28,7 @@ public class Bureau {
 	@OneToOne
 	@JoinColumn(name="collaborateurId")
 	private Collaborateur collaborateur;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.DETACH)
 	@JoinColumn(name="bureauId")
 	private List<Equipement> equipements;
 

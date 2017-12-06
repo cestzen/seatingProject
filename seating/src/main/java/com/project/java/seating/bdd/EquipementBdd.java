@@ -6,6 +6,11 @@ import com.project.java.seating.model.Equipement;
 import com.project.java.seating.model.TypeEquipement;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
+/**
+ * A DAO class that handles operations concerning the equipments
+ * @author beril
+ *
+ */
 public class EquipementBdd {
 
 	ProjectEntityManager projectEntityManager;

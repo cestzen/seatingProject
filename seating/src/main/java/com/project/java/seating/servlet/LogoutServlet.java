@@ -12,6 +12,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.services.LogService;
 
 /**
+ * servlet for logging out of the system
+ */
+/**
  * Servlet implementation class LogoutServlet
  */
 @WebServlet("/logout")
