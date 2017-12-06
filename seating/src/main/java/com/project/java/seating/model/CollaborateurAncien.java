@@ -16,7 +16,7 @@ public class CollaborateurAncien {
 	private String nomUtilisateur;
 	private Boolean etaitAdministrateur;
 	private Date dateDeSortie;
-	private String dateArriver;
+	private Date dateArriver;
 
 	public CollaborateurAncien() {
 
@@ -55,11 +55,11 @@ public class CollaborateurAncien {
 		this.prenom = prenom;
 	}
 
-	public String getDateArriver() {
+	public Date getDateArriver() {
 		return dateArriver;
 	}
 
-	public void setDateArriver(String dateArriver) {
+	public void setDateArriver(Date dateArriver) {
 		this.dateArriver = dateArriver;
 	}
 

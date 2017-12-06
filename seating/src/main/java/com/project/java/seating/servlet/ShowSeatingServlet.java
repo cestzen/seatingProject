@@ -16,7 +16,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.bdd.BatimentBdd;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Plan;
-import com.project.java.seating.services.ShowSeatingPlanService;
 
 /**
  * Servlet implementation class ShowSeatingServlet
@@ -25,7 +24,6 @@ import com.project.java.seating.services.ShowSeatingPlanService;
 public class ShowSeatingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ApplicationContext ac;
-	private ShowSeatingPlanService showSeatingPlanService;
 	private BatimentBdd batimentBdd;
        
     /**
@@ -34,7 +32,6 @@ public class ShowSeatingServlet extends HttpServlet {
     public ShowSeatingServlet() {
         super();
         ac = new ClassPathXmlApplicationContext("beans.xml");
-        showSeatingPlanService = (ShowSeatingPlanService) ac.getBean("showSeatingPlanService");
         batimentBdd = (BatimentBdd) ac.getBean("batimentBdd");
     }
    

@@ -9,6 +9,13 @@
 		class="com.project.java.seating.persistence.ProjectEntityManager">
 	</bean>
 
+	<bean id="GeneralServletService" abstract="true" />
+
+	<bean id="addCollaborateurService"
+		class="com.project.java.seating.services.AddCollaborateurService">
+		<property name="collaborateurBdd" ref="collaborateurBdd"></property>
+	</bean>
+
 	<bean id="collaborateurBdd" class="com.project.java.seating.bdd.CollaborateurBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
@@ -28,10 +35,7 @@
 	<bean id="typeEquipementBdd" class="com.project.java.seating.bdd.TypeEquipementBdd">
 		<property name="projectEntityManager" ref="projectEntityManager"></property>
 	</bean>
-	<bean id="showSeatingPlanService"
-		class="com.project.java.seating.services.ShowSeatingPlanService">
-		<property name="planBdd" ref="planBdd"></property>
-	</bean>
+
 
 
 

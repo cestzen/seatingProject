@@ -17,8 +17,7 @@
 			type="text" name="lastname" /> <br /> Nom d'utilisateur: <input
 			type="text" name="username" /> <br /> Mot de passe: <input
 			type="text" name="password" /> <br /> Admin? <input type="checkbox"
-			name="admin" /> <br /> Date d'arrivé: <input type="text"
-			name="date" /> <input type="submit" value="Submit" />
+			name="admin" /> <br /> <input type="submit" value="Submit" />
 	</form>
 </body>
 </html>

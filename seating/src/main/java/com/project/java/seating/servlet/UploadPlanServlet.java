@@ -24,7 +24,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.java.seating.bdd.BatimentBdd;
 import com.project.java.seating.model.Batiment;
 import com.project.java.seating.model.Plan;
-import com.project.java.seating.services.ShowSeatingPlanService;
 
 /**
  * Servlet implementation class UploadPlanServlet

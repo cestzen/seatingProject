@@ -1,6 +1,7 @@
 package com.project.java.seating.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class Collaborateur {
 	private String nomUtilisateur;
 	private String motDePasse;
 	private Boolean estAdministrateur;
-	private String dateArriver;
+	private Date dateArriver;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="collaborateurId")
 	private List<Equipement> equipements;
@@ -64,12 +65,12 @@ public class Collaborateur {
 		this.estAdministrateur = estAdministrateur;
 	}
 
-	public String getDateArriver() {
+	public Date getDateArriver() {
 		return dateArriver;
 	}
 
-	public void setDateArriver(String dateArriver) {
-		this.dateArriver = dateArriver;
+	public void setDateArriver(Date date) {
+		this.dateArriver = date;
 	}
 
 	public List<Equipement> getEquipements() {

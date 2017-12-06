@@ -1,5 +1,6 @@
 package com.project.java.seating.bdd;
 
+import java.util.Date;
 import java.util.List;
 
 import com.project.java.seating.model.Collaborateur;
@@ -56,14 +57,14 @@ public class CollaborateurBdd {
 	}
 
 	public void create(String nom_collaborateur, String prenom_collaborateur, Boolean estAdministrateur,
-			String dateArriver, String username, String password) {
+			Date date, String username, String password) {
 		projectEntityManager.ouvertureEntity();
 
 		Collaborateur collaborateur = new Collaborateur();
 		collaborateur.setNom(nom_collaborateur);
 		collaborateur.setPrenom(prenom_collaborateur);
 		collaborateur.setEstAdministrateur(estAdministrateur);
-		collaborateur.setDateArriver(dateArriver);
+		collaborateur.setDateArriver(date);
 		collaborateur.setNomUtilisateur(username);
 		collaborateur.setMotDePasse(password);
 
