@@ -47,8 +47,9 @@
 			<button style="margin-left: 30px;" id="submit" onclick="delOffice();">Delete</button>
 		</div>
 		<form action="./addBureaux" method="POST">
-			<input type="hidden" id="array" name="array"/> <input type="submit"
-				value="Submit" />
+			<input type="hidden" id="array" name="array" /> <input type="hidden"
+				id="planId" name="planId" value="${planId}" /><input type="submit"
+				value="Submit" onclick="upload();" />
 		</form>
 	</div>
 
@@ -76,7 +77,22 @@
  	var indexBureauSelectionner = null ;
   
   	
-  	
+  	function upload(){
+
+		var nameTypeEquipment = nameTypeEquipmentSelect.options[nameTypeEquipmentSelect.selectedIndex].text;
+		var nameUser = nameUserSelect.options[nameUserSelect.selectedIndex].text;
+		
+		if(bureauSelectionner != null){
+			
+			array[indexBureauSelectionner]["nom"] = inputName.value;
+			array[indexBureauSelectionner]["nomEquipment"] = nameEquipment.value;
+			array[indexBureauSelectionner]["nomTypeEquipment"] = nameTypeEquipment;
+			array[indexBureauSelectionner]["nomUtilisateur"] = nameUser;
+		}
+  		document.getElementById("array").value=JSON.stringify(array);
+  	}
+ 	
+ 	
   	function delOffice(){
 
   		array.splice(indexBureauSelectionner, 1);
@@ -92,6 +108,7 @@
   		
   		context.strokeRect(hor, ver, largeur, hauteur);
   		}
+  		
     }
   	
   	 function selectItemByValue(elmnt, value){
@@ -162,6 +179,7 @@
 					selectItemByValue(nameTypeEquipmentSelect,array[indexBureauSelectionner]["nomTypeEquipment"]) ;
 					selectItemByValue(nameUserSelect ,array[indexBureauSelectionner]["nomUtilisateur"]);
 					
+					
 				}
 			}
 		
@@ -179,14 +197,13 @@
 			context.strokeRect(xval-(largeur/2), yval-(hauteur/2), largeur, hauteur);
 			bureau = {nom:inputName.value,x:xval,y:yval,nomEquipment:nameEquipment.value,nomTypeEquipment:nameTypeEquipment,nomUtilisateur:nameUser};
 			array.push(bureau);
-			document.getElementById("array").value=JSON.stringify(array);
 			inputName.value = "";
 			nameEquipment.value = "";
 			nameTypeEquipmentSelect.selectedIndex = 0;
 			nameUserSelect.selectedIndex = 0;
 		}
 		
-
+		
   };
   
   

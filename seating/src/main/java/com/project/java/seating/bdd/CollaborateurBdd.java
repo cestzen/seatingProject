@@ -97,4 +97,13 @@ public class CollaborateurBdd {
 
 	}
 
+	public Collaborateur findCollaborateur(String userName) {
+		projectEntityManager.ouvertureEntity();
+		Collaborateur collab = (Collaborateur) projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("FROM Collaborateur WHERE nomUtilisateur=:userName")
+				.setParameter("userName", userName).uniqueResult();
+		projectEntityManager.fermetureEntity();
+		return collab;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.project.java.seating.bdd;
 
 import java.util.List;
 
+import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.persistence.ProjectEntityManager;
 
@@ -37,13 +38,12 @@ public class PlanBdd {
 
 		return plans;
 	}
-	
+
 	public Plan getPlan(String name) {
 
 		projectEntityManager.ouvertureEntity();
 		List<Plan> plans = projectEntityManager.getSessionFactory().getCurrentSession()
-				.createQuery("FROM Plan WHERE nom=:plan")
-				.setParameter("plan", name).list();
+				.createQuery("FROM Plan WHERE nom=:plan").setParameter("plan", name).list();
 		projectEntityManager.fermetureEntity();
 
 		return plans.get(0);
@@ -74,6 +74,18 @@ public class PlanBdd {
 
 		projectEntityManager.getSessionFactory().getCurrentSession().merge(plan);
 
+		projectEntityManager.fermetureEntity();
+	}
+
+	public void addBureau(String nom, Bureau bureau) {
+		projectEntityManager.ouvertureEntity();
+
+		Plan plan = (Plan) projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Plan WHERE nom=:nom").setParameter("nom", nom).list().get(0);
+
+		plan.addBureau(bureau);
+
+		projectEntityManager.getSessionFactory().getCurrentSession().merge(plan);
 		projectEntityManager.fermetureEntity();
 	}
 }

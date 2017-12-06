@@ -24,65 +24,70 @@ import com.project.java.seating.model.TypeEquipement;
 import com.project.java.seating.services.ShowSeatingPlanService;
 
 @WebServlet("/choosePlan")
-public class ChoosePlanServlet  extends HttpServlet {
+public class ChoosePlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ApplicationContext ac;
-	//private ShowSeatingPlanService showSeatingPlanService;
+	// private ShowSeatingPlanService showSeatingPlanService;
 	private PlanBdd planBdd;
 	private TypeEquipementBdd typeEquipementBdd;
 	private CollaborateurBdd collaborateurBdd;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ChoosePlanServlet() {
-        super();
-        ac = new ClassPathXmlApplicationContext("beans.xml");
-      //  showSeatingPlanService = (ShowSeatingPlanService) ac.getBean("showSeatingPlanService");
-        planBdd = (PlanBdd) ac.getBean("planBdd");
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ChoosePlanServlet() {
+		super();
+		ac = new ClassPathXmlApplicationContext("beans.xml");
+		// showSeatingPlanService = (ShowSeatingPlanService)
+		// ac.getBean("showSeatingPlanService");
+		planBdd = (PlanBdd) ac.getBean("planBdd");
 		typeEquipementBdd = (TypeEquipementBdd) ac.getBean("typeEquipementBdd");
 		collaborateurBdd = (CollaborateurBdd) ac.getBean("collaborateurBdd");
-    }
-   
-    /**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//List<Batiment> batiments = batimentBdd.getAll();
-		
-	    this.getServletContext().getRequestDispatcher( "/choosePlan.jsp" ).forward( request, response );
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// List<Batiment> batiments = batimentBdd.getAll();
+
+		this.getServletContext().getRequestDispatcher("/choosePlan.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Plan plan = planBdd.getPlan((String) request.getParameter("nomPlan"));
-		//Plan plan = planBdd.getPlan("planTest");
+		// Plan plan = planBdd.getPlan("planTest");
 
 		List<TypeEquipement> typeEquipementList = typeEquipementBdd.getAll();
 
 		String[] typesEquipements = new String[typeEquipementList.size()];
-		
-		for(int i = 0; i < typeEquipementList.size() ; i++)
+
+		for (int i = 0; i < typeEquipementList.size(); i++)
 			typesEquipements[i] = typeEquipementList.get(i).getNom();
 
-		request.setAttribute("typesEquipements",typesEquipements);
-		
+		request.setAttribute("typesEquipements", typesEquipements);
+
 		List<Collaborateur> collaborateursList = collaborateurBdd.getAll();
 
 		String[] collaborateurs = new String[collaborateursList.size()];
-		
-		for(int i = 0; i < collaborateursList.size() ; i++)
-			collaborateurs[i] = collaborateursList.get(i).getNom();
-		
-		request.setAttribute("collaborateurs",collaborateurs);
 
-		request.setAttribute("path",plan.getPath() );
-	    this.getServletContext().getRequestDispatcher( "/putOffice.jsp" ).forward( request, response );
-		
-		
+		for (int i = 0; i < collaborateursList.size(); i++)
+			collaborateurs[i] = collaborateursList.get(i).getNomUtilisateur();
+
+		request.setAttribute("collaborateurs", collaborateurs);
+
+		request.setAttribute("path", plan.getPath());
+		request.setAttribute("planId", plan.getNom());
+		this.getServletContext().getRequestDispatcher("/putOffice.jsp").forward(request, response);
+
 	}
 }
