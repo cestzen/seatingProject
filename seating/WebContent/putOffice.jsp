@@ -63,6 +63,7 @@
 	<script>
 
 	var array = JSON.parse(${array});
+	alert(array);
 	var canvas  = document.querySelector('#canvas');
 	var context = canvas.getContext('2d');
 
@@ -82,6 +83,14 @@
  	var bureauSelectionner = null ;
  	var indexBureauSelectionner = null ;
   
+ 	for(var i = 0; i < array.length; i++)
+		{
+		
+	    var hor = array[i]["x"]-(largeur/2) ;
+	    var ver = array[i]["y"] -(hauteur/2) ;
+		
+		context.strokeRect(hor, ver, largeur, hauteur);
+		}
   	
   	function upload(){
 
