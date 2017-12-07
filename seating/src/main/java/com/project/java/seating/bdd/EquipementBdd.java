@@ -8,6 +8,7 @@ import com.project.java.seating.persistence.ProjectEntityManager;
 
 /**
  * A DAO class that handles operations concerning the equipments
+ * 
  * @author beril
  *
  */
@@ -57,7 +58,9 @@ public class EquipementBdd {
 		Equipement equipement = new Equipement();
 		equipement.setExternalId(externalId);
 		equipement.setTypeEquipement(typeEquipement);
-
+		projectEntityManager.ouvertureEntity();
+		projectEntityManager.getSessionFactory().getCurrentSession().save(equipement);
+		projectEntityManager.fermetureEntity();
 		return equipement;
 	}
 

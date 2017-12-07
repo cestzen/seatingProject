@@ -14,10 +14,6 @@ import com.project.java.seating.services.DeleteCollaboratorService;
 /**
  * servlet for deleting a leaving collaborateur
  */
-
-/**
- * Servlet implementation class AddCollaborator
- */
 @WebServlet(name = "deleteCollab", urlPatterns = { "/deleteCollab" })
 public class DeleteCollaboratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

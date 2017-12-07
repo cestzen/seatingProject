@@ -14,16 +14,19 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.project.java.seating.bdd.BatimentBdd;
+import com.project.java.seating.bdd.BureauBdd;
 import com.project.java.seating.bdd.CollaborateurBdd;
 import com.project.java.seating.bdd.PlanBdd;
 import com.project.java.seating.bdd.TypeEquipementBdd;
 import com.project.java.seating.model.Batiment;
+import com.project.java.seating.model.Bureau;
 import com.project.java.seating.model.Collaborateur;
 import com.project.java.seating.model.Plan;
 import com.project.java.seating.model.TypeEquipement;
 
 /**
  * servlet for choosing an existing plan
+ * 
  * @author beril
  *
  */
@@ -88,6 +91,26 @@ public class ChoosePlanServlet extends HttpServlet {
 			collaborateurs[i] = collaborateursList.get(i).getNomUtilisateur();
 
 		request.setAttribute("collaborateurs", collaborateurs);
+
+		List<Bureau> bureaux = plan.getBureaux();
+		String arrayString = "'[";
+
+		for (int i = 0; i < bureaux.size(); i++) {
+			arrayString = arrayString + "{";
+			arrayString = arrayString + "\"nom\":\"" + bureaux.get(i).getNom() + "\",\"x\":" + bureaux.get(i).getX()
+					+ ",\"y\":" + bureaux.get(i).getY()
+					+ ",\"nomEquipment\":\"\",\"nomTypeEquipment\":\"\",\"nomUtilisateur\":\""
+					+ bureaux.get(i).getCollaborateur().getNomUtilisateur() + "\"";
+			arrayString = arrayString + "}";
+
+			if (i < bureaux.size() - 1)
+				arrayString = arrayString + ",";
+		}
+
+		arrayString = arrayString + "]'";
+
+		System.out.println(arrayString);
+		request.setAttribute("array", arrayString);
 
 		request.setAttribute("path", plan.getPath());
 		request.setAttribute("planId", plan.getNom());

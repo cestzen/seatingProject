@@ -50,6 +50,7 @@ public class AddOfficeService extends GeneralServletService {
 	public void addOffice(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
 			throws IOException, ServletException {
 		String jsonString = request.getParameter("array");
+		System.out.println(jsonString);
 
 		try {
 			JSONArray jsonData = new JSONArray(jsonString);

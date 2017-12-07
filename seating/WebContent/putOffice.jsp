@@ -13,6 +13,8 @@
 	if (session.getAttribute("admin") == null || !session.getAttribute("admin").equals("admin")) {
 		response.sendRedirect("login.jsp");
 	}
+
+	String array = (String) request.getAttribute("array");
 %>
 </head>
 <body>
@@ -60,7 +62,7 @@
 
 	<script>
 
-	var array = [];
+	var array = JSON.parse(${array});
 	var canvas  = document.querySelector('#canvas');
 	var context = canvas.getContext('2d');
 

@@ -9,6 +9,7 @@ import com.project.java.seating.persistence.ProjectEntityManager;
 
 /**
  * A DAO class that handles operations concerning the office desks
+ * 
  * @author beril
  *
  */
