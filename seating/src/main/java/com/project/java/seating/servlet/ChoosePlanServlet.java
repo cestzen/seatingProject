@@ -109,7 +109,6 @@ public class ChoosePlanServlet extends HttpServlet {
 
 		arrayString = arrayString + "]'";
 
-		System.out.println(arrayString);
 		request.setAttribute("array", arrayString);
 
 		request.setAttribute("path", plan.getPath());

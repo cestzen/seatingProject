@@ -15,6 +15,7 @@ import com.project.java.seating.persistence.ProjectEntityManager;
  */
 public class BureauBdd {
 	private ProjectEntityManager projectEntityManager;
+	private CollaborateurBdd collaborateurBdd;
 
 	public BureauBdd() {
 
@@ -22,6 +23,10 @@ public class BureauBdd {
 
 	public void setProjectEntityManager(ProjectEntityManager projectEntityManager) {
 		this.projectEntityManager = projectEntityManager;
+	}
+
+	public void setCollaborateurBdd(CollaborateurBdd collaborateurBdd) {
+		this.collaborateurBdd = collaborateurBdd;
 	}
 
 	public List<Bureau> getAll() {
@@ -85,6 +90,28 @@ public class BureauBdd {
 	public void create(Bureau bureau) {
 		projectEntityManager.ouvertureEntity();
 		projectEntityManager.getSessionFactory().getCurrentSession().save(bureau);
+		projectEntityManager.fermetureEntity();
+	}
+
+	public boolean findBureau(Bureau bureau) {
+		projectEntityManager.ouvertureEntity();
+		List bureaux = projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Bureau WHERE nom=:nom AND x=:x AND y=:y").setParameter("nom", bureau.getNom())
+				.setParameter("x", bureau.getX()).setParameter("y", bureau.getY()).list();
+		projectEntityManager.fermetureEntity();
+
+		return bureaux.isEmpty();
+	}
+
+	public void update(Bureau bureau, String collab) {
+		Collaborateur collaborateur = collaborateurBdd.findCollaborateur(collab);
+		projectEntityManager.ouvertureEntity();
+		Bureau bureaur = (Bureau) projectEntityManager.getSessionFactory().getCurrentSession()
+				.createQuery("from Bureau WHERE nom=:nom AND x=:x AND y=:y").setParameter("nom", bureau.getNom())
+				.setParameter("x", bureau.getX()).setParameter("y", bureau.getY()).list().get(0);
+		bureaur.setNom(bureau.getNom());
+		bureaur.setCollaborateur(collaborateur);
+		projectEntityManager.getSessionFactory().getCurrentSession().save(bureaur);
 		projectEntityManager.fermetureEntity();
 	}
 

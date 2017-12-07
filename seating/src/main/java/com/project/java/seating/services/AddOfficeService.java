@@ -18,6 +18,7 @@ import com.project.java.seating.model.Bureau;
 
 /**
  * service for adding new bureau to the plan
+ * 
  * @author beril
  *
  */
@@ -63,17 +64,29 @@ public class AddOfficeService extends GeneralServletService {
 				bureau.setY(Float.parseFloat(singleData.getString("y")));
 				bureau.setNom(singleData.getString("nom"));
 
-				// add collaborateur
-				bureau.setCollaborateur(collaborateurBdd.findCollaborateur(singleData.getString("nomUtilisateur")));
+				if (bureauBdd.findBureau(bureau)) {
 
-				if (singleData.getString("nomEquipment") != null && !singleData.getString("nomEquipment").isEmpty()) {
-					// addEquipment to the bureau
-					bureau.addEquipement(equipementBdd.create(singleData.getString("nomEquipment"),
-							singleData.getString("nomTypeEquipment")));
+					// add collaborateur
+					bureau.setCollaborateur(collaborateurBdd.findCollaborateur(singleData.getString("nomUtilisateur")));
 
+					if (singleData.getString("nomEquipment") != null
+							&& !singleData.getString("nomEquipment").isEmpty()) {
+						// addEquipment to the bureau
+						bureau.addEquipement(equipementBdd.create(singleData.getString("nomEquipment"),
+								singleData.getString("nomTypeEquipment")));
+
+					}
+					bureauBdd.create(bureau);
+					planBdd.addBureau(request.getParameter("planId"), bureau);
+				} else {
+					if (singleData.getString("nomEquipment") != null
+							&& !singleData.getString("nomEquipment").isEmpty()) {
+						// addEquipment to the bureau
+						bureau.addEquipement(equipementBdd.create(singleData.getString("nomEquipment"),
+								singleData.getString("nomTypeEquipment")));
+					}
+					bureauBdd.update(bureau, singleData.getString("nomUtilisateur"));
 				}
-				bureauBdd.create(bureau);
-				planBdd.addBureau(request.getParameter("planId"), bureau);
 			}
 			this.successRedirect("Bureaux cree", "/loginSuccess.jsp", servletContext, request, response);
 		} catch (JSONException e) {
