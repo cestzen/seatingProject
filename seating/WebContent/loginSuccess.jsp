@@ -41,7 +41,7 @@
 	<h4>Panel utilisateur</h4>
 	<c:choose>
 		<c:when test='${user!=null}'>
-			<a href="https://html.com/attributes/a-href/">Visualiser les plans</a>
+			<a href="showSeating">Visualiser les plans</a>
 		</c:when>
 	</c:choose>
 	<form action="./logout" method="GET">
